@@ -17,11 +17,11 @@ else {
     $lookout = '';
 }
 
-echo '<li class="category-border clearfix">' .
+echo
     $edit .
     '<span class="list-buttons-block">' .
     $delete .
 //    $status .
-    '</span>' .
+    '</span>'
 //    $lookout .
-    '</li>';
+    ;

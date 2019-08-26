@@ -21,7 +21,16 @@ $this->title = 'Категории';
     <?= \yii\widgets\ListView::widget(
             [
                 'dataProvider' => $dataProvider,
-                'itemView' => '_list'
+                'itemView' => '_list',
+                'options' => [
+                    'tag' => 'ul',
+                    'class' => 'products-list'
+                ],
+                'itemOptions' => [
+                        'tag' => 'li',
+                    'class' => 'category-border clearfix'
+                ],
+                'summary' => ''
             ]
     )
     ?>
