@@ -7,42 +7,24 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\Category */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Categories';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Категории';
+
 ?>
-<div class="category-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><span class="blue"><?= Html::encode($this->title) ?></span></h1>
 
-    <p>
-        <?= Html::a('Create Category', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <div class="add-action-wrapper">
+        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i> Создать', ['create'], ['class' => 'button-blue button-l left-fa']) ?>
+    </div>
 
     <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title:ntext',
-            'category_header:ntext',
-            'content:ntext',
-            'url:url',
-            //'manager_id',
-            //'status_id',
-            //'arrangement',
-            //'type_f',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+    <?= \yii\widgets\ListView::widget(
+            [
+                'dataProvider' => $dataProvider,
+                'itemView' => '_list'
+            ]
+    )
+    ?>
 
     <?php Pjax::end(); ?>
 
-</div>
