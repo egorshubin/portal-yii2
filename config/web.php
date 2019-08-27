@@ -50,7 +50,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => true,
+            'enableStrictParsing' => false,
             'rules' => [
                 'admin/<controller>/<action>' => 'admin/<controller>/<action>'
             ],
