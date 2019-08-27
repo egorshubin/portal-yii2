@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\WebinarSearch */
+/* @var $searchModel app\models\search\WebinarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Webinars';

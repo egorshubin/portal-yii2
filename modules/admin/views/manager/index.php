@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ManagerSearch */
+/* @var $searchModel app\models\search\ManagerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Managers';
