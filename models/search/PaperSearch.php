@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Paperissue as PaperissueModel;
+use app\models\Paper as PaperModel;
 
 /**
- * Paperissue represents the model behind the search form of `app\models\Paperissue`.
+ * PaperSearch represents the model behind the search form of `app\models\Paper`.
  */
-class Paperissue extends PaperissueModel
+class PaperSearch extends PaperModel
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class Paperissue extends PaperissueModel
     public function rules()
     {
         return [
-            [['id', 'month_f', 'year_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'document', 'base_url'], 'safe'],
+            [['id', 'manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
+            [['title'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class Paperissue extends PaperissueModel
      */
     public function search($params)
     {
-        $query = PaperissueModel::find();
+        $query = PaperModel::find();
 
         // add conditions that should always apply here
 
@@ -59,15 +59,15 @@ class Paperissue extends PaperissueModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'month_f' => $this->month_f,
-            'year_f' => $this->year_f,
+            'manager_id' => $this->manager_id,
+            'status_id' => $this->status_id,
+            'arrangement' => $this->arrangement,
+            'type_f' => $this->type_f,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'document', $this->document])
-            ->andFilterWhere(['like', 'base_url', $this->base_url]);
+        $query->andFilterWhere(['like', 'title', $this->title]);
 
         return $dataProvider;
     }

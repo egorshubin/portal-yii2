@@ -4,13 +4,13 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Paper;
-use app\modules\admin\models\Paper as PaperSearch;
+use app\models\search\PaperSearch as PaperSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PaperController implements the CRUD actions for Paper model.
+ * PaperController implements the CRUD actions for PaperSearch model.
  */
 class PaperController extends Controller
 {
@@ -30,7 +30,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Lists all Paper models.
+     * Lists all PaperSearch models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Displays a single Paper model.
+     * Displays a single PaperSearch model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,7 +58,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Creates a new Paper model.
+     * Creates a new PaperSearch model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -76,7 +76,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Updates an existing Paper model.
+     * Updates an existing PaperSearch model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Deletes an existing Paper model.
+     * Deletes an existing PaperSearch model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +110,7 @@ class PaperController extends Controller
     }
 
     /**
-     * Finds the Paper model based on its primary key value.
+     * Finds the PaperSearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Paper the loaded model

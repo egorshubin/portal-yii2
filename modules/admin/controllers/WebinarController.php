@@ -4,13 +4,13 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Webinar;
-use app\modules\admin\models\Webinar as WebinarSearch;
+use app\models\search\WebinarSearch as WebinarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * WebinarController implements the CRUD actions for Webinar model.
+ * WebinarController implements the CRUD actions for WebinarSearch model.
  */
 class WebinarController extends Controller
 {
@@ -30,7 +30,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Lists all Webinar models.
+     * Lists all WebinarSearch models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Displays a single Webinar model.
+     * Displays a single WebinarSearch model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,7 +58,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Creates a new Webinar model.
+     * Creates a new WebinarSearch model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -76,7 +76,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Updates an existing Webinar model.
+     * Updates an existing WebinarSearch model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Deletes an existing Webinar model.
+     * Deletes an existing WebinarSearch model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +110,7 @@ class WebinarController extends Controller
     }
 
     /**
-     * Finds the Webinar model based on its primary key value.
+     * Finds the WebinarSearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Webinar the loaded model

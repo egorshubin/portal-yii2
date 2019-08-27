@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Category as CategoryModel;
+use app\models\Paperissue as PaperissueModel;
 
 /**
- * Category represents the model behind the search form of `app\models\Category`.
+ * PaperissueSearch represents the model behind the search form of `app\models\Paperissue`.
  */
-class Category extends CategoryModel
+class PaperissueSearch extends PaperissueModel
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class Category extends CategoryModel
     public function rules()
     {
         return [
-            [['id', 'manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'category_header', 'content', 'url'], 'safe'],
+            [['id', 'month_f', 'year_f', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'document', 'base_url'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class Category extends CategoryModel
      */
     public function search($params)
     {
-        $query = CategoryModel::find();
+        $query = PaperissueModel::find();
 
         // add conditions that should always apply here
 
@@ -59,18 +59,15 @@ class Category extends CategoryModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'manager_id' => $this->manager_id,
-            'status_id' => $this->status_id,
-            'arrangement' => $this->arrangement,
-            'type_f' => $this->type_f,
+            'month_f' => $this->month_f,
+            'year_f' => $this->year_f,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'category_header', $this->category_header])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'url', $this->url]);
+            ->andFilterWhere(['like', 'document', $this->document])
+            ->andFilterWhere(['like', 'base_url', $this->base_url]);
 
         return $dataProvider;
     }

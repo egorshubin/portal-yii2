@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Manager as ManagerModel;
+use app\models\Event as EventModel;
 
 /**
- * Manager represents the model behind the search form of `app\models\Manager`.
+ * EventSearch represents the model behind the search form of `app\models\Event`.
  */
-class Manager extends ManagerModel
+class EventSearch extends EventModel
 {
     /**
      * {@inheritdoc}
@@ -17,8 +17,8 @@ class Manager extends ManagerModel
     public function rules()
     {
         return [
-            [['id', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'image', 'company', 'address', 'email', 'site', 'phone', 'phone_time'], 'safe'],
+            [['id', 'manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'content', 'document'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class Manager extends ManagerModel
      */
     public function search($params)
     {
-        $query = ManagerModel::find();
+        $query = EventModel::find();
 
         // add conditions that should always apply here
 
@@ -59,19 +59,17 @@ class Manager extends ManagerModel
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'manager_id' => $this->manager_id,
+            'status_id' => $this->status_id,
+            'arrangement' => $this->arrangement,
             'type_f' => $this->type_f,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'image', $this->image])
-            ->andFilterWhere(['like', 'company', $this->company])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'site', $this->site])
-            ->andFilterWhere(['like', 'phone', $this->phone])
-            ->andFilterWhere(['like', 'phone_time', $this->phone_time]);
+            ->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(['like', 'document', $this->document]);
 
         return $dataProvider;
     }

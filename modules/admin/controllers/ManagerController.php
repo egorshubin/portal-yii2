@@ -4,13 +4,13 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Manager;
-use app\modules\admin\models\Manager as ManagerSearch;
+use app\models\search\ManagerSearch as ManagerSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ManagerController implements the CRUD actions for Manager model.
+ * ManagerController implements the CRUD actions for ManagerSearch model.
  */
 class ManagerController extends Controller
 {
@@ -30,7 +30,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Lists all Manager models.
+     * Lists all ManagerSearch models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Displays a single Manager model.
+     * Displays a single ManagerSearch model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,7 +58,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Creates a new Manager model.
+     * Creates a new ManagerSearch model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -76,7 +76,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Updates an existing Manager model.
+     * Updates an existing ManagerSearch model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Deletes an existing Manager model.
+     * Deletes an existing ManagerSearch model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +110,7 @@ class ManagerController extends Controller
     }
 
     /**
-     * Finds the Manager model based on its primary key value.
+     * Finds the ManagerSearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Manager the loaded model

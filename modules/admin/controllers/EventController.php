@@ -4,13 +4,13 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\models\Event;
-use app\modules\admin\models\Event as EventSearch;
+use app\models\search\EventSearch as EventSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * EventController implements the CRUD actions for Event model.
+ * EventController implements the CRUD actions for EventSearch model.
  */
 class EventController extends Controller
 {
@@ -30,7 +30,7 @@ class EventController extends Controller
     }
 
     /**
-     * Lists all Event models.
+     * Lists all EventSearch models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class EventController extends Controller
     }
 
     /**
-     * Displays a single Event model.
+     * Displays a single EventSearch model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,7 +58,7 @@ class EventController extends Controller
     }
 
     /**
-     * Creates a new Event model.
+     * Creates a new EventSearch model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
@@ -76,7 +76,7 @@ class EventController extends Controller
     }
 
     /**
-     * Updates an existing Event model.
+     * Updates an existing EventSearch model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class EventController extends Controller
     }
 
     /**
-     * Deletes an existing Event model.
+     * Deletes an existing EventSearch model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,7 +110,7 @@ class EventController extends Controller
     }
 
     /**
-     * Finds the Event model based on its primary key value.
+     * Finds the EventSearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
      * @return Event the loaded model

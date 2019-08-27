@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Event as EventModel;
+use app\models\Category as CategoryModel;
 
 /**
- * Event represents the model behind the search form of `app\models\Event`.
+ * CategorySearch represents the model behind the search form of `app\models\Category`.
  */
-class Event extends EventModel
+class CategorySearch extends CategoryModel
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class Event extends EventModel
     {
         return [
             [['id', 'manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'content', 'document'], 'safe'],
+            [['title', 'category_header', 'content', 'url'], 'safe'],
         ];
     }
 
@@ -40,7 +40,7 @@ class Event extends EventModel
      */
     public function search($params)
     {
-        $query = EventModel::find();
+        $query = CategoryModel::find();
 
         // add conditions that should always apply here
 
@@ -68,8 +68,9 @@ class Event extends EventModel
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'category_header', $this->category_header])
             ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'document', $this->document]);
+            ->andFilterWhere(['like', 'url', $this->url]);
 
         return $dataProvider;
     }

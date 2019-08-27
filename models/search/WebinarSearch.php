@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\admin\models;
+namespace app\models\search;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Webinar as WebinarModel;
 
 /**
- * Webinar represents the model behind the search form of `app\models\Webinar`.
+ * WebinarSearch represents the model behind the search form of `app\models\Webinar`.
  */
-class Webinar extends WebinarModel
+class WebinarSearch extends WebinarModel
 {
     /**
      * {@inheritdoc}

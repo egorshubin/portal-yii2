@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\Webinar */
+/* @var $searchModel app\modules\admin\models\WebinarSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Webinars';
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Webinar', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create WebinarSearch', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>

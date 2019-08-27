@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\Paper */
+/* @var $searchModel app\modules\admin\models\PaperSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Papers';
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Paper', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create PaperSearch', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
