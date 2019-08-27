@@ -68,19 +68,20 @@ AdminAsset::register($this);
         <div class="col-lg-3 menu-wrapper hidden-menu">
             <?php echo Menu::widget([
                 'items' => [
-                    ['label' => 'Категории', 'url' => ['admin/category']],
-                    ['label' => 'Статьи', 'url' => ['admin/event']],
-                    ['label' => 'Вебинары', 'url' => ['admin/webinar']],
-                    ['label' => 'Газеты', 'url' => ['admin/paper']],
-                    ['label' => 'Менеджеры', 'url' => ['admin/manager']],
+                    ['label' => 'Категории', 'url' => ['/admin/category/index']],
+                    ['label' => 'Статьи', 'url' => ['/admin/event/index']],
+                    ['label' => 'Вебинары', 'url' => ['/admin/webinar/index']],
+                    ['label' => 'Газеты', 'url' => ['/admin/paper/index']],
+                    ['label' => 'Менеджеры', 'url' => ['/admin/manager/index']],
                 ],
                 'options' => [
                     'class' => 'menu',
                 ],
                 'itemOptions' => [
                         'class' => 'menu-link'
-],
+                ],
                 'activeCssClass' => 'active',
+                'activateItems' => 'true'
             ]);?>
         </div>
         <div class="col-lg-9 right-column-wrapper">
