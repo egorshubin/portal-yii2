@@ -11,8 +11,22 @@ $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['dele
     ],
 ]);
 
-$publish = ;
-
+if ($attributes['status_id'] == 1) {
+    $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true" data-id="' . $model->id . '"></i>', ['unpublish', 'id' => $model->id], [
+        'title' => 'Снять с публикации',
+        'data' => [
+            'method' => 'post',
+        ],
+    ]);
+}
+else {
+    $publish = Html::a('<i class="status-icon fa publish fa-toggle-off red" aria-hidden="true" data-id="' . $model->id . '"></i>', ['publish', 'id' => $model->id], [
+        'title' => 'Опубликовать',
+        'data' => [
+            'method' => 'post',
+        ],
+    ]);
+}
 
 
 if ($hashref) {
@@ -34,7 +48,7 @@ echo
     $edit .
     '<span class="list-buttons-block">' .
     $delete .
-//    $publish .
+    $publish .
     '</span>' .
     $lookout
     ;

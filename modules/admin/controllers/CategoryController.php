@@ -109,6 +109,20 @@ class CategoryController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionPublish($id) {
+        $model = $this->findModel($id);
+        $model->status_id = '1';
+        $model->save();
+        return $this->redirect(['index']);
+    }
+
+    public function actionUnpublish($id) {
+        $model = $this->findModel($id);
+        $model->status_id = '0';
+        $model->save();
+        return $this->redirect(['index']);
+    }
+
     /**
      * Finds the CategorySearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
