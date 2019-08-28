@@ -1,0 +1,413 @@
+body {
+    font-family:Arial;
+    color: #282828;
+    padding-bottom: 40px;
+}
+a[href] {
+    color: #2164b0;
+    text-decoration: none;
+}
+A[href]:hover {
+    color: red;
+    text-decoration: underline;
+}
+h1{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.4em;
+}
+.bold {
+    font-weight: bold;
+}
+.hidden {
+    display: none;}
+
+.content.real-content img {
+    width: 100% !important;
+    height: auto !important;
+}
+.content.real-content p, .content.real-content li, .content.real-content a, .content.real-content h1, .content.real-content h2, .content.real-content h3, .content.real-content h4, .content.real-content h5, .content.real-content h6, .content.real-content span {
+    text-align: left !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5em !important;
+}
+.content.real-content p, .content.real-content h1, .content.real-content h2, .content.real-content h3, .content.real-content h4, .content.real-content h5, .content.real-content h6
+{
+    margin-top: 0 !important;
+    margin-bottom: 1rem !important;
+}
+/*header*/
+.header-wrap {
+    background: 50% 0 repeat-y #215da1 url(../images/header.jpg);
+    padding-top: 40px;
+    padding-bottom: 35px;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 50px;
+}
+
+/*version*/
+.header-version {
+    color: #fff;
+    font-size: 11px;
+    margin: 0;
+    opacity: 0.5;
+}
+
+/*logos*/
+.top-row {
+    margin-bottom: 10px;
+}
+.top-row:after{
+    content:"";
+    display: table;
+    clear:both;
+}
+.header-siteLink {
+    background: 0 0 no-repeat;
+    display: block;
+    float: left;
+}
+
+.btn-k:hover {
+    opacity: 0.8;
+}
+.tm-texpert.header-siteLink {
+    background-image: url(../images/logo_t.png);
+    width: 142px;
+    height: 26px;
+    margin-right: 30px;
+}
+.tm-kodeks.header-siteLink {
+    background-image: url(../images/logo_k.png);
+    width: 114px;
+    height: 33px;
+    margin-top: -7px;
+}
+
+/*client links and announcement*/
+.btn-k[href] {
+    color: #fff;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 20px;
+    margin-top: 4px;
+    padding-top: 40px;
+    vertical-align: top;
+    margin-left: 30px;
+}
+.btn-k[href]:first-child {
+    margin-left: 0;
+}
+.btn-k[href]:hover {
+    color: #fff;
+    text-decoration: none;
+    opacity: 0.8;
+}
+.btn-download-k {
+    background: 0 0 no-repeat url(../images/icon_download.png);
+}
+.btn-kassist-k {
+    background: 0 0 no-repeat url(../images/icon_kassist.png);
+}
+.btn-launch-k {
+    background: 0 0 no-repeat url(../images/icon_launch.png);
+}
+.header-clientLinks p {
+    font-size:21px; color:white;
+    margin-top: 40px;
+    margin-bottom: 0px;
+}
+.btn-helpWrap {
+    display: inline-block;
+    margin-left: 4px;
+    margin-top: 67px;
+    position: relative;
+}
+.btn-help-k {
+    background: 50% 50% no-repeat url(../images/icon_help.png);
+    cursor: pointer;
+    height: 15px;
+    width: 15px;
+    opacity: 0.8;
+}
+.btn-help-k:hover {
+    opacity: 1;
+}
+.help-box {
+    padding: 30px;
+    width: 440px;
+    white-space: normal;
+    position: absolute;
+    right: -36px;
+    top: 24px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.45);
+    background: #fff;
+}
+.header-clientLinks .help-box p {
+    color: #282828;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.help-title {
+    font-size: 18px;
+    font-weight: bold;
+}
+/*manager, contacts*/
+.contacts {
+    font-size: 14px;
+    padding: 30px;
+    border: 2px solid #b8d1e8;
+}
+.service-photo-row {
+    margin-bottom: 15px;
+}
+.manager-photo {
+    width: 50px;
+    position: relative;
+    float: left;
+}
+.manager-photo img {
+    width: 100%;
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    border-radius:50%;
+}
+.manager-name {
+    float: left;
+    margin-left: 15px;
+}
+.service-phone {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/*content*/
+.content {
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.category-content {
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+.right-content-wrapper {
+    padding-left: 65px;
+}
+.video-wrapper {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+.video-wrapper video {
+    max-width: 800px;
+    max-height: 600px;
+    width: 100%;
+    border: 1px solid #dddddd;
+}
+.download-wrapper{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.download-a{
+    display: inline-block;
+    height: 32px;
+    padding-top: 5px;
+    font-size: 16px;
+    padding-left: 42px;
+}
+.document-download {
+    background: url(../images/Document-Download-01-32.png) no-repeat;
+}
+.document-download:hover {
+    background: url(../images/Document-Download-red.png) no-repeat;
+}
+.video-download {
+    background: url(../images/Download-32.png) no-repeat;
+}
+.video-download:hover {
+    background: url(../images/Download-red.png) no-repeat;
+}
+ul.products-list {
+    padding-left: 0;
+    list-style:none;
+}
+ul.products-list li {
+    margin-bottom: 20px;
+}
+ul.products-list li a {
+    font-size: 19px;
+}
+.links-auth {
+    display: inline-block;
+    height: 16px;
+    width: 16px;
+    margin-right: 10px;
+}
+.unlocked {
+    background: url(../images/green_lock.png) no-repeat;
+}
+.locked {
+    background: url(../images/red_lock_1.png) no-repeat;
+}
+.add-action-wrapper {
+    margin-bottom: 30px;}
+
+.button-empty {
+    display: inline-block;
+    cursor:pointer;
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #2164b0;
+    border: 1px solid #2164b0;
+}
+.button-empty-active {
+    background-color: #2164b0;
+    color: #fff;
+}
+.button-empty:hover, .button-empty:focus {
+    background-color: #2164b0;
+    border: 1px solid #2164b0;
+    color: white;
+    text-decoration: none;
+}
+
+.content.real-content a.button-takepart {
+    background-color: #2164b0;
+    color: #fff;
+    display: inline-block;
+    cursor:pointer;
+    box-sizing: border-box;
+}
+.content.real-content a.button-takepart:hover {
+    background-color: #5492D8;
+    text-decoration: none;
+}
+.content.real-content a.button-takepart:active {
+    position: relative;
+    top:1px;
+}
+
+.button-m {
+    padding: 3px 10px;
+    font-size: 18px;
+}
+
+.content.real-content a.button-l {
+    padding: 5px 15px;
+    font-size: 18px !important;
+}
+
+.button-margin-right {
+    margin-right: 10px;
+}
+
+.button-year:active{
+    position: relative;
+    top: 1px;
+}
+
+.back-button {
+    font-weight: bold;
+    border-width: 2px;
+    padding: 5px 12px 5px 7px;
+    position: relative;
+}
+a.back-button:hover, a.back-button:focus, a.back-button:active {
+    border-width: 2px;
+    text-decoration: none;
+    color: white;
+}
+a.back-button:active {
+    top: 1px;
+}
+.logo-wrapper {
+    margin-bottom: 30px;
+}
+
+@media(min-width: 992px) and (max-width: 1199px) {
+    .contacts {
+        padding: 15px;}
+}
+@media(max-width: 991px) {
+    .header-wrap {
+        padding-top: 30px;}
+    .header-clientLinks {
+        display: none;
+    }
+    /*.header-clientLinks p {*/
+        /*margin-top: 20px;}*/
+    .right-content-wrapper {
+        padding-left: 15px;
+    }
+    .img-responsive-404 {
+        width: 100%;
+    }
+}
+@media (max-width: 340px) {
+    .tm-texpert.header-siteLink {
+        margin-right: 15px;
+    }
+}
+
+@font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.eot?1123727');
+    src: url('../font/fontello.eot?1123727#iefix') format('embedded-opentype'),
+    url('../font/fontello.woff2?1123727') format('woff2'),
+    url('../font/fontello.woff?1123727') format('woff'),
+    url('../font/fontello.ttf?1123727') format('truetype'),
+    url('../font/fontello.svg?1123727#fontello') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'fontello';
+    src: url('../font/fontello.svg?1123727#fontello') format('svg');
+  }
+}
+*/
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    font-family: "fontello";
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+
+.icon-left-big:before { content: '\e800'; } /* '' */
