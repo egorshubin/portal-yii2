@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "category".
@@ -20,6 +21,9 @@ use Yii;
  * @property int $updated_at
  *
  * @property Manager $manager
+ * @property array $managers
+ * @property array $categories
+ * @property string $date
  * @property Type $typeF
  * @property CategoryCategory[] $categoryCategories
  * @property CategoryEvent[] $categoryEvents
@@ -28,6 +32,15 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    /**
+     * @return array
+     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
     /**
      * {@inheritdoc}
      */
@@ -42,9 +55,9 @@ class Category extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'url'], 'required'],
+            [['title', 'manager_id'], 'required'],
             [['title', 'category_header', 'content'], 'string'],
-            [['manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
+            [['manager_id', 'status_id', 'arrangement', 'type_f'], 'integer'],
             [['url'], 'string', 'max' => 255],
             [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['manager_id' => 'id']],
             [['type_f'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_f' => 'id']],
@@ -58,18 +71,30 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'category_header' => 'Category Header',
-            'content' => 'Content',
+            'title' => 'Название',
+            'category_header' => 'Заголовок для клиентов',
+            'content' => 'Описание',
             'url' => 'Url',
             'manager_id' => 'Manager ID',
             'status_id' => 'Status ID',
             'arrangement' => 'Arrangement',
             'type_f' => 'Type F',
             'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'updated_at' => 'Последнее обновление',
         ];
     }
+
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->updated_at,'php:d.m.Y');
+    }
+
+
 
     /**
      * @return \yii\db\ActiveQuery
@@ -77,6 +102,24 @@ class Category extends \yii\db\ActiveRecord
     public function getManager()
     {
         return $this->hasOne(Manager::className(), ['id' => 'manager_id']);
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getManagers() {
+        return Manager::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getCategories() {
+        return Category::find()
+            ->indexBy('id')
+            ->all();
     }
 
     /**

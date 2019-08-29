@@ -21,6 +21,12 @@ use Yii;
  */
 class Paperissue extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            yii\behaviors\TimestampBehavior::className(),
+        ];
+    }
     /**
      * {@inheritdoc}
      */

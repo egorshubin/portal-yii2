@@ -109,18 +109,18 @@ class CategoryController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionPublish($id) {
+    public function actionPublish($id, $redirect) {
         $model = $this->findModel($id);
         $model->status_id = '1';
         $model->save();
-        return $this->redirect(['index']);
+        return $this->redirect([$redirect]);
     }
 
-    public function actionUnpublish($id) {
+    public function actionUnpublish($id, $redirect) {
         $model = $this->findModel($id);
         $model->status_id = '0';
         $model->save();
-        return $this->redirect(['index']);
+        return $this->redirect([$redirect]);
     }
 
     /**

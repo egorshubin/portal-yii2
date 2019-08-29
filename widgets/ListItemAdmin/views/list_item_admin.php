@@ -12,7 +12,7 @@ $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['dele
 ]);
 
 if ($attributes['status_id'] == 1) {
-    $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true" data-id="' . $model->id . '"></i>', ['unpublish', 'id' => $model->id], [
+    $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true"></i>', ['unpublish', 'id' => $model->id, 'redirect' => 'index'], [
         'title' => 'Снять с публикации',
         'data' => [
             'method' => 'post',
@@ -20,7 +20,7 @@ if ($attributes['status_id'] == 1) {
     ]);
 }
 else {
-    $publish = Html::a('<i class="status-icon fa publish fa-toggle-off red" aria-hidden="true" data-id="' . $model->id . '"></i>', ['publish', 'id' => $model->id], [
+    $publish = Html::a('<i class="status-icon fa publish fa-toggle-off red" aria-hidden="true"></i>', ['publish', 'id' => $model->id, 'redirect' => 'index'], [
         'title' => 'Опубликовать',
         'data' => [
             'method' => 'post',

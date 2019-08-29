@@ -831,3 +831,15 @@ select.form-control.month-select{
         margin-bottom: 10px;
     }
 }
+
+.class-for-updated-at-field, .button-save-wrap {
+    border: none;
+    background: transparent;
+}
+.class-for-updated-at-field:focus, .button-save-wrap {
+    border: none;
+    outline: none;
+}
+.button-save-wrap {
+    cursor: pointer
+}
