@@ -1,5 +1,18 @@
 jQuery(document).ready(function ($) {
     "use strict";
+    tinyMCE.init({
+        // General options
+        mode : "specific_textareas",
+        editor_selector : "content-editor",
+        theme : "modern",
+        language:"ru",
+        branding: false,
+        plugins: 'link image lists code takepart',
+        menubar: false,
+        toolbar: 'undo redo | bold italic underline | bullist numlist | link unlink | takepart | code',
+        convert_urls: false
+    });
+
     /*Menu toggler*/
     $('.menu-toggler').click(function () {
         $('.hidden-menu').slideToggle();

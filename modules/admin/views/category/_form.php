@@ -18,7 +18,13 @@ use yii\helpers\ArrayHelper;
 
 <?= $form->field($model, 'category_header', ['options' => ['class' => 'form-group']])->label('Заголовок для клиентов', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
 
-<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Описание категории', ['class' => 'form-block-header'])->textarea(['rows' => 6]) ?>
+<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Описание категории', ['class' => 'form-block-header'])->textarea(['rows' => 6, 'class' => 'content-editor']) ?>
+<div class="instruct"><p>1) При нажатии на Enter появляется новый абзац с отступом внизу. Если нужно
+        сделать просто перевод строки без отступа, нажмите Shift+Enter.</p>
+    <p>
+        2) Если вы копируете текст из ворда, с сайта или откуда-то еще, рекомендуется сначала прогонять
+        его через блокнот (самый простой, базовый в Windows). Иначе будут добавляться лишние мусорные
+        теги.</p></div>
 
 <?= $form->field($model, 'manager_id', ['options' => ['class' => 'form-group']])->label('Отображаемый менеджер<span class="gray">*</span>', ['class' => 'form-block-header'])->dropDownList(ArrayHelper::map($model->managers, 'id', 'title')) ?>
 

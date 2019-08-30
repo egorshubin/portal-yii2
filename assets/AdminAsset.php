@@ -12,6 +12,7 @@ class AdminAsset extends AssetBundle
         'css/admin.css',
     ];
     public $js = [
+        'tinymce/tinymce.min.js',
         'js/admin.js'
     ];
     public $depends = [
