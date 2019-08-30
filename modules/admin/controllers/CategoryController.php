@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\search\CategoryChildrenSearch;
 use Yii;
 use app\models\Category;
 use app\models\search\CategorySearch as CategorySearch;
@@ -90,8 +91,13 @@ class CategoryController extends Controller
             return $this->redirect(['update', 'id' => $model->id]);
         }
 
+        $searchModel = new CategoryChildrenSearch();
+        $dataProvider = $searchModel->search($model->id);
+
         return $this->render('update', [
             'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

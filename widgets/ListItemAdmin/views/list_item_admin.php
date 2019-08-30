@@ -1,7 +1,5 @@
 <?php
-
 use yii\helpers\Html;
-
 $edit = Html::a('<i class="edit-icon fa fa-pencil" aria-hidden="true"></i>' . $attributes['title'], ['update', 'id' => $model->id], ['class' => 'list-title-block']);
 
 $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['delete', 'id' => $model->id], [
@@ -34,10 +32,10 @@ if ($hashref) {
         Html::tag('div',
             Html::a(
                 Html::tag('i', '', ['class' => 'fa fa-eye']),
-                ['/category/view', 'id' => $model->id],
+                ['/' . $attributes['type'] . '/view', 'id' => $model->id],
                 ['class' => 'href-copy-a', 'title' => 'Посмотреть на сайте', 'target' => '_blank']
             ) .
-            Html::input('text', '', Yii::$app->urlManager->createAbsoluteUrl(['category/view', 'id' => $model->id]), ['class' => 'href-copy-input', 'readonly' => 'readonly']),
+            Html::input('text', '', Yii::$app->urlManager->createAbsoluteUrl(['/' . $attributes['type'] . '/view', 'id' => $model->id]), ['class' => 'href-copy-input', 'readonly' => 'readonly']),
             ['class' => 'href-copy']);
 }
 else {

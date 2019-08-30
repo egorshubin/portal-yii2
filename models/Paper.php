@@ -19,6 +19,7 @@ use Yii;
  * @property CategoryPaper[] $categoryPapers
  * @property Manager $manager
  * @property Type $typeF
+ * @property string $type
  * @property PaperissueTie[] $paperissueTies
  */
 class Paper extends \yii\db\ActiveRecord
@@ -89,6 +90,9 @@ class Paper extends \yii\db\ActiveRecord
     public function getTypeF()
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
+    }
+    public function getType() {
+        return $this->getTypeF()->one()->attributes['db_name'];
     }
 
     /**

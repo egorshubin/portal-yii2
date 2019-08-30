@@ -24,6 +24,7 @@ use yii\behaviors\TimestampBehavior;
  * @property array $managers
  * @property array $categories
  * @property string $date
+ * @property string $type
  * @property Type $typeF
  * @property CategoryCategory[] $categoryCategories
  * @property CategoryEvent[] $categoryEvents
@@ -128,6 +129,10 @@ class Category extends \yii\db\ActiveRecord
     public function getTypeF()
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
+    }
+
+    public function getType() {
+        return $this->getTypeF()->one()->attributes['db_name'];
     }
 
     /**

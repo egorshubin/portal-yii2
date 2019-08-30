@@ -21,6 +21,7 @@ use Yii;
  * @property CategoryEvent[] $categoryEvents
  * @property Manager $manager
  * @property Type $typeF
+ * @property string $type
  */
 class Event extends \yii\db\ActiveRecord
 {
@@ -94,5 +95,8 @@ class Event extends \yii\db\ActiveRecord
     public function getTypeF()
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
+    }
+    public function getType() {
+        return $this->getTypeF()->one()->attributes['db_name'];
     }
 }

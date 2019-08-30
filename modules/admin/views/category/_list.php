@@ -9,6 +9,7 @@ use app\widgets\ListItemAdmin\ListItemAdmin;
 /* @var $model app\models\Category */
 
 $this->title = $model->title;
+
 \yii\web\YiiAsset::register($this);
 ?>
 
@@ -16,7 +17,8 @@ $this->title = $model->title;
         'model' => $model,
         'attributes' => [
             'title',
-            'status_id'
+            'status_id',
+            'type'
         ],
         'template' => '{value}',
         'hashref' => true
