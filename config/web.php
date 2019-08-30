@@ -12,7 +12,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@domain' => 'http://portal2',
-        '@admin' => '@domain/index.php?r=admin'
+        '@partials' => '@app/modules/admin/views/partials'
     ],
     'components' => [
         'request' => [

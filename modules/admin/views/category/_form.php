@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 
 <?php $form = ActiveForm::begin(); ?>
 <div class="panel-container clearfix">
-    <?= $this->render('@app/modules/admin/views/partials/edit_panel', ['model' => $model]); ?>
+    <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>
 </div>
 
 <?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Название<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
@@ -19,19 +19,14 @@ use yii\helpers\ArrayHelper;
 <?= $form->field($model, 'category_header', ['options' => ['class' => 'form-group']])->label('Заголовок для клиентов', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
 
 <?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Описание категории', ['class' => 'form-block-header'])->textarea(['rows' => 6, 'class' => 'content-editor']) ?>
-<div class="instruct"><p>1) При нажатии на Enter появляется новый абзац с отступом внизу. Если нужно
-        сделать просто перевод строки без отступа, нажмите Shift+Enter.</p>
-    <p>
-        2) Если вы копируете текст из ворда, с сайта или откуда-то еще, рекомендуется сначала прогонять
-        его через блокнот (самый простой, базовый в Windows). Иначе будут добавляться лишние мусорные
-        теги.</p></div>
+<?= $this->render('@partials/instruct'); ?>
 
 <?= $form->field($model, 'manager_id', ['options' => ['class' => 'form-group']])->label('Отображаемый менеджер<span class="gray">*</span>', ['class' => 'form-block-header'])->dropDownList(ArrayHelper::map($model->managers, 'id', 'title')) ?>
 
 <?= $form->field($model, 'date', ['options' => ['class' => 'form-group']])->label('Дата обновления', ['class' => 'form-block-header'])->textInput(['class' => 'class-for-updated-at-field', 'disabled' => true]) ?>
 
 <div class="panel-container panel-container-bottom clearfix">
-    <?= $this->render('@app/modules/admin/views/partials/edit_panel', ['model' => $model]); ?>
+    <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>
 </div>
 
 <?php ActiveForm::end(); ?>

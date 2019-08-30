@@ -11,7 +11,7 @@ $this->title = $model->title;
 
 <h1><?= '<span class="blue">Редактирование категории:</span><br>' . Html::encode($this->title) ?></h1>
 <?=
-    $this->render('@app/modules/admin/views/partials/list_tabs_wrapper');
+    $this->render('@partials/list_tabs_wrapper');
 ?>
 <div id="category-description-wrapper" class="category-description-wrapper">
     <?= $this->render('_form', [
