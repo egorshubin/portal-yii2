@@ -18,10 +18,10 @@ class CategoryChildrenSearch extends ActiveRecord
 
     public function search($category_id)
     {
-        $query1 = $this->customQueryBuilder(EventModel::find(), 'event', $category_id, 'categoryEvents');
-        $query2 = $this->customQueryBuilder(WebinarModel::find(), 'webinar', $category_id, 'categoryWebinars');
-        $query3 = $this->customQueryBuilder(PaperModel::find(), 'paper', $category_id, 'categoryPapers');
-//        $query4 = $this->customQueryBuilder(CategoryModel::find(), 'category', $category_id, 'categoryCategories');
+        $query1 = $this->customQueryBuilder(EventModel::find(), EventModel::tableName(), $category_id, 'categoryEvents');
+        $query2 = $this->customQueryBuilder(WebinarModel::find(), WebinarModel::tableName(), $category_id, 'categoryWebinars');
+        $query3 = $this->customQueryBuilder(PaperModel::find(), PaperModel::tableName(), $category_id, 'categoryPapers');
+//        $query4 = $this->customQueryBuilder(CategoryModel::find(), CategoryModel::tableName(), $category_id, 'categoryCategories');
 
         $query1->union($query2)->union($query3)
 //            ->union($query4)
@@ -29,6 +29,9 @@ class CategoryChildrenSearch extends ActiveRecord
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query1,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
         ]);
 
         return $dataProvider;

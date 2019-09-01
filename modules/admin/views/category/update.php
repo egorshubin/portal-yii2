@@ -7,7 +7,6 @@ use yii\web\View;
 /* @var $this yii\web\View */
 /* @var $model app\models\Category */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-
 $this->title = $model->title;
 
 ?>
@@ -23,7 +22,8 @@ $this->title = $model->title;
 </div>
 <div id="category-list-wrapper">
     <?= $this->render('contents_list_sorted', [
-        'dataProvider' => $dataProvider
+        'dataProvider' => $dataProvider,
+        'categoryId' => $model->id,
     ]) ?>
 </div>
 

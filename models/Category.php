@@ -143,6 +143,10 @@ class Category extends \yii\db\ActiveRecord
         return $this->hasMany(CategoryCategory::className(), ['parent_id' => 'id']);
     }
 
+    public function getCategoryCategory() {
+        return $this->hasMany(CategoryCategory::className(), ['unit_id' => 'id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

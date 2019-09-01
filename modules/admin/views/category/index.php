@@ -19,7 +19,7 @@ $this->title = 'Категории';
     <?= \yii\widgets\ListView::widget(
             [
                 'dataProvider' => $dataProvider,
-                'itemView' => '_list',
+                'itemView' => '@partials/_list_item',
                 'options' => [
                     'tag' => 'ul',
                     'class' => 'products-list'

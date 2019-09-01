@@ -21,5 +21,5 @@ $this->title = $model->title;
             'type'
         ],
         'template' => '{value}',
-        'hashref' => true
+        'hashref' => true,
     ]) ?>

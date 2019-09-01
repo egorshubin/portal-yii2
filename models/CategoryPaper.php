@@ -21,7 +21,7 @@ class CategoryPaper extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            yii\behaviors\TimestampBehavior::className(),
+            \yii\behaviors\TimestampBehavior::className(),
         ];
     }
     /**

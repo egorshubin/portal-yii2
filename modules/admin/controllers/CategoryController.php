@@ -129,6 +129,19 @@ class CategoryController extends Controller
         return $this->redirect([$redirect]);
     }
 
+    public function actionOffcategory($id, $redirect, $categoryId, $tableName) {
+        $relModelName = 'app\models\Category' . ucfirst($tableName);
+        $relModel = new $relModelName();
+        $row = $relModel::find()
+            ->where('unit_id = ' . $id)
+            ->andWhere('parent_id = ' . $categoryId)
+            ->one()
+            ->delete();
+
+
+        return $this->redirect($redirect . '?id=' . $categoryId);
+    }
+
     /**
      * Finds the CategorySearch model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

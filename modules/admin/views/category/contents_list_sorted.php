@@ -8,7 +8,7 @@ use yii\web\View;
 echo \yii\widgets\ListView::widget(
     [
         'dataProvider' => $dataProvider,
-        'itemView' => '_list',
+        'itemView' => '_list_item_in_category',
         'options' => [
             'tag' => 'ul',
             'class' => 'products-list',
@@ -17,6 +17,7 @@ echo \yii\widgets\ListView::widget(
             'tag' => 'li',
             'class' => 'category-border clearfix'
         ],
-        'summary' => ''
+        'summary' => '',
+        'viewParams' => ['categoryId' => $categoryId]
     ]
 );
