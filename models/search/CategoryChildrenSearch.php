@@ -33,10 +33,7 @@ class CategoryChildrenSearch extends ActiveRecord
         ->from($query1->union($query2)->union($query3))->orderBy('arrangement ASC');
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 20,
-            ],
+            'query' => $query
         ]);
 
         return $dataProvider;

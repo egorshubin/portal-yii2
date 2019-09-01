@@ -18,14 +18,14 @@ $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['dele
     ]);
 
 if ($attributes['status_id'] == 1) {
-    $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true"></i>', ['unpublish', 'id' => $model['id'], 'redirect' => 'index'], [
+    $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true"></i>', ['unpublish', 'id' => $model['id'], 'redirect' => '/admin/category/update', 'categoryId' => $categoryId, 'tableName' => $attributes['type']], [
         'title' => 'Снять с публикации',
         'data' => [
             'method' => 'post',
         ],
     ]);
 } else {
-    $publish = Html::a('<i class="status-icon fa publish fa-toggle-off red" aria-hidden="true"></i>', ['publish', 'id' => $model['id'], 'redirect' => 'index'], [
+    $publish = Html::a('<i class="status-icon fa publish fa-toggle-off red" aria-hidden="true"></i>', ['publish', 'id' => $model['id'], 'redirect' => '/admin/category/update', 'categoryId' => $categoryId, 'tableName' => $attributes['type']], [
         'title' => 'Опубликовать',
         'data' => [
             'method' => 'post',

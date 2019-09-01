@@ -115,18 +115,26 @@ class CategoryController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionPublish($id, $redirect) {
-        $model = $this->findModel($id);
-        $model->status_id = '1';
+    public function actionPublish($id, $redirect, $categoryId, $tableName) {
+        $modelName = ucfirst($tableName);
+        $modelName = 'app\\models\\' . $modelName;
+        $model = new $modelName();
+        $model = $model::findOne($id);
+        $model->status_id = 1;
         $model->save();
-        return $this->redirect([$redirect]);
+
+        return $this->redirect([$redirect, 'id' => $categoryId]);
     }
 
-    public function actionUnpublish($id, $redirect) {
-        $model = $this->findModel($id);
-        $model->status_id = '0';
+    public function actionUnpublish($id, $redirect, $categoryId, $tableName) {
+        $modelName = ucfirst($tableName);
+        $modelName = 'app\\models\\' . $modelName;
+        $model = new $modelName();
+        $model = $model::findOne($id);
+        $model->status_id = 0;
         $model->save();
-        return $this->redirect([$redirect]);
+
+        return $this->redirect([$redirect, 'id' => $categoryId]);
     }
 
     public function actionOffcategory($id, $redirect, $categoryId, $tableName) {
