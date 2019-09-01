@@ -12,6 +12,8 @@ class AdminAsset extends AssetBundle
         'css/admin.css',
     ];
     public $js = [
+        'js/jquery-ui.min.js',
+        'js/jquery.ui.touch-punch.min.js',
         'tinymce/tinymce.min.js',
         'js/admin.js'
     ];

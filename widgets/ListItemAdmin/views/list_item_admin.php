@@ -10,15 +10,6 @@ $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['dele
     ],
 ]);
 
-if ($categoryId) {
-    $unbindFromCategory = Html::a('<i class="fa fa-chain-broken gray offcategory-icon" aria-hidden="true"></i>', ['offcategory', 'id' => $model->id, 'redirect' => '/admin/category/update', 'categoryId' => $categoryId, 'tableName' => $attributes['type']], [
-        'title' => 'Открепить от категории',
-        'data' => [
-            'method' => 'post',
-        ],
-    ]);
-}
-
 if ($attributes['status_id'] == 1) {
     $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true"></i>', ['unpublish', 'id' => $model->id, 'redirect' => 'index'], [
         'title' => 'Снять с публикации',
@@ -49,13 +40,8 @@ $lookout = Html::tag('div', '', ['class' => 'clearfix']) .
 
 echo
     $edit .
-    '<span class="list-buttons-block">';
-if (($categoryId) && ($categoryId != null) && ($categoryId != '')) {
-    echo $unbindFromCategory;
-} else {
-    echo $delete;
-}
-echo
+    '<span class="list-buttons-block">' .
+     $delete .
     $publish . '</span>';
 if ($hashref) {
     echo $lookout;

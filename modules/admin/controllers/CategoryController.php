@@ -138,8 +138,23 @@ class CategoryController extends Controller
             ->one()
             ->delete();
 
+        return $this->redirect([$redirect, 'id' => $categoryId]);
+    }
 
-        return $this->redirect($redirect . '?id=' . $categoryId);
+    public function actionReorder() {
+        if ($params = Yii::$app->request->getBodyParams()) {
+            $request_array = explode('/', $params['data']);
+            foreach ($request_array as $row) {
+                $row_array = explode(',', $row);
+                $modelName = ucfirst($row_array[1]);
+                $modelName = 'app\\models\\' . $modelName;
+                $model = new $modelName();
+                $model = $model::findOne($row_array[0]);
+                $model->arrangement = $row_array[2];
+                $model->save();
+            }
+            $this->redirect(['/admin/category/update', 'id' => $params['categoryId']]);
+        }
     }
 
     /**
@@ -157,4 +172,6 @@ class CategoryController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+
 }

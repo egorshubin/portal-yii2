@@ -22,6 +22,7 @@ $this->title = $model->title;
 </div>
 <div id="category-list-wrapper">
     <?= $this->render('contents_list_sorted', [
+         'model' => $model,
         'dataProvider' => $dataProvider,
         'categoryId' => $model->id,
     ]) ?>

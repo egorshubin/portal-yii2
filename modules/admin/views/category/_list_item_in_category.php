@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\web\View;
-use app\widgets\ListItemAdmin\ListItemAdmin;
+use app\widgets\ListItemAdminCategory\ListItemAdminCategory;
 
 /* @var $this yii\web\View */
 
@@ -10,7 +10,7 @@ $this->title = $model->title;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<?= ListItemAdmin::widget([
+<?= ListItemAdminCategory::widget([
     'model' => $model,
     'attributes' => [
         'title',
