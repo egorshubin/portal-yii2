@@ -128,4 +128,7 @@ jQuery(document).ready(function ($) {
         sendReorder(finalString, catId);
     })
 
+    if ($('.error-summary')) {
+        $('.error-summary').prependTo('.content-wrapper')
+    }
 });

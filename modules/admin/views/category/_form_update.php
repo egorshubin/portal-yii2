@@ -10,6 +10,7 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
+<?= $form->errorSummary($model); ?>
 <div class="panel-container clearfix">
     <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>
 </div>
@@ -23,7 +24,8 @@ use yii\helpers\ArrayHelper;
 
 <?= $form->field($model, 'manager_id', ['options' => ['class' => 'form-group']])->label('Отображаемый менеджер<span class="gray">*</span>', ['class' => 'form-block-header'])->dropDownList(ArrayHelper::map($model->managers, 'id', 'title')) ?>
 
-<?= $form->field($model, 'date', ['options' => ['class' => 'form-group']])->label('Дата обновления', ['class' => 'form-block-header'])->textInput(['class' => 'class-for-updated-at-field', 'disabled' => true]) ?>
+<?= $form->field($model, 'date', ['options' => ['class' => 'form-group']])->label('Дата обновления', ['class' => 'form-block-header'])->textInput(['class' => 'class-for-updated-at-field', 'disabled' => true])
+ ?>
 
 <div class="panel-container panel-container-bottom clearfix">
     <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>

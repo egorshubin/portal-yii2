@@ -45,18 +45,6 @@ class CategoryController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single CategorySearch model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new CategorySearch model.
@@ -68,7 +56,7 @@ class CategoryController extends Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -121,9 +109,9 @@ class CategoryController extends Controller
         $model = new $modelName();
         $model = $model::findOne($id);
         $model->status_id = 1;
-        $model->save();
-
-        return $this->redirect([$redirect, 'id' => $categoryId]);
+        if ($model->save()) {
+            return $this->redirect([$redirect, 'id' => $categoryId]);
+        }
     }
 
     public function actionUnpublish($id, $redirect, $categoryId, $tableName) {
@@ -132,9 +120,9 @@ class CategoryController extends Controller
         $model = new $modelName();
         $model = $model::findOne($id);
         $model->status_id = 0;
-        $model->save();
-
-        return $this->redirect([$redirect, 'id' => $categoryId]);
+        if ($model->save()) {
+            return $this->redirect([$redirect, 'id' => $categoryId]);
+        }
     }
 
     public function actionOffcategory($id, $redirect, $categoryId, $tableName) {

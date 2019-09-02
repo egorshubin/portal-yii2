@@ -12,7 +12,6 @@ use yii\behaviors\TimestampBehavior;
  * @property string $title
  * @property string $category_header
  * @property string $content
- * @property string $url
  * @property int $manager_id
  * @property int $status_id
  * @property int $arrangement
@@ -59,7 +58,6 @@ class Category extends \yii\db\ActiveRecord
             [['title', 'manager_id'], 'required'],
             [['title', 'category_header', 'content'], 'string'],
             [['manager_id', 'status_id', 'arrangement', 'type_f'], 'integer'],
-            [['url'], 'string', 'max' => 255],
             [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['manager_id' => 'id']],
             [['type_f'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_f' => 'id']],
         ];
@@ -75,7 +73,6 @@ class Category extends \yii\db\ActiveRecord
             'title' => 'Название',
             'category_header' => 'Заголовок для клиентов',
             'content' => 'Описание',
-            'url' => 'Url',
             'manager_id' => 'Manager ID',
             'status_id' => 'Status ID',
             'arrangement' => 'Arrangement',

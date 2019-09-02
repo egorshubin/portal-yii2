@@ -18,7 +18,7 @@ class CategorySearch extends CategoryModel
     {
         return [
             [['id', 'manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'category_header', 'content', 'url'], 'safe'],
+            [['title', 'category_header', 'content'], 'safe'],
         ];
     }
 
@@ -72,8 +72,7 @@ class CategorySearch extends CategoryModel
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'category_header', $this->category_header])
-            ->andFilterWhere(['like', 'content', $this->content])
-            ->andFilterWhere(['like', 'url', $this->url]);
+            ->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

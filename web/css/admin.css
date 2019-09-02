@@ -205,7 +205,6 @@ ul.products-list li {
 .delete-icon:hover, .delete-icon:focus, .offcategory-icon:hover, .offcategory:focus {
     color: red;
 }
-
 .unlocked {
     background: url(../images/green_lock.png) no-repeat;
 }
@@ -843,4 +842,13 @@ select.form-control.month-select{
 }
 .button-save-wrap {
     cursor: pointer
+}
+.help-block {color: red}
+.error-summary {
+    border: 2px solid red;
+    font-weight: bold;
+    font-size: 18px;
+    background: #fff;
+    padding: 15px 15px 0;
+    margin-bottom: 30px;
 }

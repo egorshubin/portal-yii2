@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -41,9 +42,9 @@ AdminAsset::register($this);
 
             <div class="col-lg-3 menu-wrapper">
                 <div class="menu-link">
-                    <a href="/admin"
+                    <a href="/admin/index"
                         <?php
-                        if (Yii::$app->request->url == Yii::getAlias(@admin)) {
+                        if (Yii::$app->request->url == Yii::getAlias('/admin/index')) {
                             echo 'class = "active"';
                         }
                         ?>
@@ -66,7 +67,8 @@ AdminAsset::register($this);
     <?= Alert::widget() ?>
     <div class="row all-content-wrapper">
         <div class="col-lg-3 menu-wrapper hidden-menu">
-            <?php echo Menu::widget([
+            <?php
+            echo Menu::widget([
                 'items' => [
                     ['label' => 'Категории', 'url' => ['/admin/category/index']],
                     ['label' => 'Статьи', 'url' => ['/admin/event/index']],
@@ -78,15 +80,17 @@ AdminAsset::register($this);
                     'class' => 'menu',
                 ],
                 'itemOptions' => [
-                        'class' => 'menu-link'
+                    'class' => 'menu-link'
                 ],
                 'activeCssClass' => 'active',
                 'activateItems' => 'true'
-            ]);?>
+            ]);
+            ?>
+
         </div>
         <div class="col-lg-9 right-column-wrapper">
             <div class="content-wrapper">
-                <?=$content?>
+                <?= $content ?>
             </div>
 
         </div>
