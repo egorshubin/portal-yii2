@@ -103,7 +103,23 @@ class CategoryController extends Controller
         return $this->redirect(['index']);
     }
 
-    public function actionPublish($id, $redirect, $categoryId, $tableName) {
+    public function actionPublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 1;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
+    }
+
+    public function actionUnpublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 0;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
+    }
+
+    public function actionPublishfromcat($id, $redirect, $categoryId, $tableName) {
         $modelName = ucfirst($tableName);
         $modelName = 'app\\models\\' . $modelName;
         $model = new $modelName();
@@ -114,7 +130,7 @@ class CategoryController extends Controller
         }
     }
 
-    public function actionUnpublish($id, $redirect, $categoryId, $tableName) {
+    public function actionUnpublishfromcat($id, $redirect, $categoryId, $tableName) {
         $modelName = ucfirst($tableName);
         $modelName = 'app\\models\\' . $modelName;
         $model = new $modelName();

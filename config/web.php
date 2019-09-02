@@ -58,6 +58,9 @@ $config = [
                 '<controller>/<id>' => '<controller>/view',
             ],
         ],
+        'transliter' => [
+            'class' => 'inblank\transliter\Transliter',
+        ],
     ],
     'params' => $params,
     'modules' => [

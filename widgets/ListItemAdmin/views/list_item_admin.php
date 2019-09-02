@@ -5,7 +5,7 @@ $edit = Html::a('<i class="edit-icon fa fa-pencil" aria-hidden="true"></i>' . $a
 
 $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['delete', 'id' => $model->id], [
     'data' => [
-        'confirm' => 'Вы уверены, что хотите удалить эту категорию?',
+        'confirm' => 'Вы уверены, что хотите удалить?',
         'method' => 'post',
     ],
 ]);

@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use app\helpers\CustomHelper;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "event".
@@ -22,9 +24,19 @@ use Yii;
  * @property Manager $manager
  * @property Type $typeF
  * @property string $type
+ * @property UploadedFile $download
  */
 class Event extends \yii\db\ActiveRecord
 {
+
+    /**
+     * @var UploadedFile
+     */
+    public $download;
+
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -46,9 +58,9 @@ class Event extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'content'], 'required'],
-            [['title', 'content'], 'string'],
+            [['title', 'content', 'document'], 'string'],
             [['manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['document'], 'string', 'max' => 255],
+            [['download'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf, doc, docx, rtf, odt', 'maxSize' => CustomHelper::getSizeLimitBytes()],
             [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['manager_id' => 'id']],
             [['type_f'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_f' => 'id']],
         ];
@@ -96,7 +108,42 @@ class Event extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
     }
+
+    /**
+     * @return mixed
+     */
     public function getType() {
         return $this->getTypeF()->one()->attributes['db_name'];
+    }
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->updated_at,'php:d.m.Y');
+    }
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getManagers() {
+        return Manager::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    /**
+     * @return bool
+     */
+    public function upload()
+    {
+        if ($this->validate()) {
+            $baseName = Yii::$app->transliter->translate($this->download->baseName) . '_' . rand(0, 99);
+
+            $this->download->saveAs('uploads/' . $baseName  . '.' . $this->download->extension);
+            return $baseName  . '.' . $this->download->extension;
+        } else {
+            return false;
+        }
     }
 }

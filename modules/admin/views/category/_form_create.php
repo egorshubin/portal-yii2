@@ -22,7 +22,7 @@ use yii\helpers\ArrayHelper;
 <?= $form->field($model, 'category_header', ['options' => ['class' => 'form-group']])->label('Заголовок для клиентов', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
 
 <?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Описание категории', ['class' => 'form-block-header'])->textarea(['rows' => 6, 'class' => 'content-editor']) ?>
-<?= $this->render('instruct'); ?>
+<?= $this->render('@partials/instruct'); ?>
 
 <?= $form->field($model, 'manager_id', ['options' => ['class' => 'form-group']])->label('Отображаемый менеджер<span class="gray">*</span>', ['class' => 'form-block-header'])->dropDownList(ArrayHelper::map($model->managers, 'id', 'title')) ?>
 

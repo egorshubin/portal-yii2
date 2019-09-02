@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05251a4beeaa8dfa7849f73389718d5f",
+    "content-hash": "291ea44a2bcc702a66c80b66ccfacb1a",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -71,7 +71,7 @@
             "version": "v1.3.2",
             "source": {
                 "type": "git",
-                "url": "git@github.com:bestiejs/punycode.js.git",
+                "url": "https://github.com/bestiejs/punycode.js.git",
                 "reference": "38c8d3131a82567bfef18da09f7f4db68c84f8a3"
             },
             "dist": {
@@ -326,6 +326,57 @@
                 "html"
             ],
             "time": "2019-07-14T18:58:38+00:00"
+        },
+        {
+            "name": "inblank/yii2-transliter",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/inblank/yii2-transliter.git",
+                "reference": "9b66651b533f940cc9f7c5d34518ec2222708c92"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/inblank/yii2-transliter/zipball/9b66651b533f940cc9f7c5d34518ec2222708c92",
+                "reference": "9b66651b533f940cc9f7c5d34518ec2222708c92",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "codeception/codeception": "^2.1",
+                "codeception/specify": "~0.4",
+                "codeception/verify": "~0.3",
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "inblank\\transliter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Pavel Aleksandrov",
+                    "role": "Developer",
+                    "email": "inblank@yandex.ru"
+                }
+            ],
+            "description": "Yii2 transliterator",
+            "homepage": "https://github.com/inblank/yii2-transliter",
+            "keywords": [
+                "russian",
+                "translit",
+                "yandex",
+                "yii2",
+                "яндекс"
+            ],
+            "time": "2017-07-22T20:59:14+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
