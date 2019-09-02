@@ -44,18 +44,6 @@ class WebinarController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single WebinarSearch model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
 
     /**
      * Creates a new WebinarSearch model.
@@ -67,7 +55,7 @@ class WebinarController extends Controller
         $model = new Webinar();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -87,7 +75,7 @@ class WebinarController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['update', 'id' => $model->id]);
         }
 
         return $this->render('update', [

@@ -167,10 +167,10 @@ body .mb-45 {
     padding-left: 15px;
     font-size: 18px;
 }
-.active a {
+.active a, a.active {
     background-color: #15A5FA;
 }
-.active a:hover, .active a:focus {
+.active a:hover, .active a:focus, a.active:hover, a.active:focus {
     background-color: #FF9008;
 }
 

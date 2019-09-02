@@ -42,9 +42,9 @@ AdminAsset::register($this);
 
             <div class="col-lg-3 menu-wrapper">
                 <div class="menu-link">
-                    <a href="/admin/index"
+                    <a href='/admin/default/index'
                         <?php
-                        if (Yii::$app->request->url == Yii::getAlias('/admin/index')) {
+                        if (Yii::$app->request->url == Yii::getAlias('/admin/default/index')) {
                             echo 'class = "active"';
                         }
                         ?>
