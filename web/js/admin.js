@@ -131,4 +131,9 @@ jQuery(document).ready(function ($) {
     if ($('.error-summary')) {
         $('.error-summary').prependTo('.content-wrapper')
     }
+
+    $('.save').click(function () {
+        $('.undercover-loading').show();
+        $('form').submit();
+    })
 });

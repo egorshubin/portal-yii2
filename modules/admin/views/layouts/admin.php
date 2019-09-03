@@ -97,7 +97,19 @@ AdminAsset::register($this);
 
     </div>
 </div>
-
+<div id="popup-confirm" class="undercover-loading">
+    <div class="container">
+        <div class="loading-save">
+            <div class="loading-save-header">
+                Идет сохранение файла
+            </div>
+            <?= Html::img('@web/images/ajax-loader.gif', ['alt' => 'Loading, Loading!']) ?>
+            <div class="loading-save-footer">
+                Не закрывайте эту вкладку до окончания загрузки
+            </div>
+        </div>
+    </div>
+</div>
 <?php $this->endBody() ?>
 </body>
 </html>

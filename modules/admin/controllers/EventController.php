@@ -77,17 +77,16 @@ class EventController extends Controller
         ]);
     }
 
+    /**
+     * @param $model
+     * @return \yii\web\Response
+     */
     protected function actionSave($model) {
         $post = Yii::$app->request->post();
         if ($docname = $this->actionUpload($model)) {
             $postDoc = $post['Event']['document'];
             if ($postDoc != '' && $postDoc != null) {
-                try {
-                    unlink('uploads/' . $postDoc);
-                }
-                catch (\Exception $e) {
-                    echo $e->getMessage();
-                }
+                @unlink('uploads/' . $postDoc);
             }
             $post['Event']['document'] = $docname;
 
@@ -125,12 +124,7 @@ class EventController extends Controller
         $model = $this->findModel($id);
         $filename = $model->document;
         if ($filename != null && $filename != '') {
-            try {
-                unlink('uploads/' . $filename);
-            }
-            catch (\Exception $e) {
-                echo $e->getMessage();
-            }
+            @unlink('uploads/' . $filename);
         }
 
         $model->delete();

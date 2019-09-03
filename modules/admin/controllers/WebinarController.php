@@ -8,6 +8,7 @@ use app\models\search\WebinarSearch as WebinarSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * WebinarController implements the CRUD actions for WebinarSearch model.
@@ -54,9 +55,7 @@ class WebinarController extends Controller
     {
         $model = new Webinar();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
 
         return $this->render('create', [
             'model' => $model,
@@ -74,13 +73,46 @@ class WebinarController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $model
+     * @return \yii\web\Response
+     */
+    protected function actionSave($model) {
+        $post = Yii::$app->request->post();
+        if ($docname = $this->actionUpload($model)) {
+            $postDoc = $post['Webinar']['video'];
+            if ($postDoc != '' && $postDoc != null) {
+                @unlink('webinars/' . $postDoc);
+            }
+            $post['Webinar']['video'] = $docname;
+
+        }
+        if ($model->load($post) && $model->save() && $model->saveCheckedIds($post['Webinar']['checkedIds'])) {
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
+    }
+
+    /**
+     * @param $model
+     * @return bool
+     */
+    protected function actionUpload($model)
+    {
+        if (Yii::$app->request->isPost && $model->download = UploadedFile::getInstance($model, 'download')) {
+            if ($name = $model->upload()) {
+                // file is uploaded successfully
+
+                return $name;
+            }
+        }
+        return false;
     }
 
     /**
@@ -92,9 +124,43 @@ class WebinarController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $filename = $model->video;
+        if ($filename != null && $filename != '') {
+            @unlink('webinars/' . $filename);
+        }
+
+        $model->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @param $redirect
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionPublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 1;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $redirect
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUnpublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 0;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
     }
 
     /**

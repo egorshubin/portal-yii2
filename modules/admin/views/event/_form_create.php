@@ -20,7 +20,7 @@ use yii\widgets\Pjax;
 
 <?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Название<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
 
-<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Текст', ['class' => 'form-block-header'])->textarea(['rows' => 20, 'class' => 'content-editor']) ?>
+<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Текст<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 20, 'class' => 'content-editor']) ?>
 <?= $this->render('@partials/instruct'); ?>
 
 <?= $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Загрузить файл приглашения:', ['class' => 'form-block-header'])->fileInput();

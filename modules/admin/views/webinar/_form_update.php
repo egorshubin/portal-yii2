@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Webinar;
 use yii\helpers\Html;
 use yii\web\View;
 use yii\widgets\ActiveForm;
@@ -7,7 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Event */
+/* @var $model app\models\Webinar */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -19,17 +20,17 @@ use yii\widgets\Pjax;
 
 <?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Название<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 2]) ?>
 
-<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Текст<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 20, 'class' => 'content-editor']) ?>
-<?= $this->render('@partials/instruct'); ?>
-
-<?php if($model->attributes['document'] != '' && $model->attributes['document'] != null) {
-echo $form->field($model, 'document', ['options' => ['class' => 'form-group']])->label('Текущий файл приглашения:', ['class' => 'form-block-header'])->textInput(['class' => 'current_invitation_file', 'readonly' => true]);
-echo $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Заменить на новый файл:', ['class' => 'form-block-header'])->fileInput(); }
+<?php if($model->attributes['video'] != '' && $model->attributes['video'] != null) {
+    echo $form->field($model, 'video', ['options' => ['class' => 'form-group']])->label('Текущий файл вебинара:', ['class' => 'form-block-header'])->textInput(['class' => 'current_invitation_file', 'readonly' => true]);
+    echo $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Заменить на новый файл:', ['class' => 'form-block-header'])->fileInput(); }
 else {
-    echo $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Загрузить файл приглашения:', ['class' => 'form-block-header'])->fileInput();
-    }?>
-<div class="little">Форматы doc, docx, rtf, pdf, odt, jpg, png<br>
+    echo $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Загрузить файл вебинара:', ['class' => 'form-block-header'])->fileInput();
+}?>
+<div class="little">Формат mp4<br>
     Файл размером не больше <?=\app\helpers\CustomHelper::getSizeLimit()?> Мб</div>
+
+<?= $form->field($model, 'content', ['options' => ['class' => 'form-group']])->label('Дополнительный текст под видео', ['class' => 'form-block-header'])->textarea(['rows' => 6, 'class' => 'content-editor']) ?>
+<?= $this->render('@partials/instruct'); ?>
 
 <?= $form->field($model, 'checkedIds', ['options' => ['class' => 'form-group checklist']])->label('Родительские категории', ['class' => 'form-block-header'])->checkboxList(ArrayHelper::map($model->categories, 'id', 'title')) ?>
 
@@ -43,3 +44,4 @@ else {
 </div>
 
 <?php ActiveForm::end(); ?>
+

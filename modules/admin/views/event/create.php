@@ -6,7 +6,6 @@ use yii\widgets\Breadcrumbs;
 /* @var $this yii\web\View */
 /* @var $model app\models\Event */
 
-$this->title = 'Create Event';
 echo Breadcrumbs::widget([
     'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>",
     'links' => [
@@ -20,7 +19,6 @@ echo Breadcrumbs::widget([
     'homeLink' => false
 ]);
 ?>
-<div class="event-create">
 
     <h1><span class="blue">Создание статьи:</span></h1>
 
@@ -28,4 +26,3 @@ echo Breadcrumbs::widget([
         'model' => $model,
     ]) ?>
 
-</div>

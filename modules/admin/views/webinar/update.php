@@ -1,21 +1,31 @@
 <?php
 
+use app\models\Webinar;
 use yii\helpers\Html;
+
+/* @var $this yii\web\View */
+
+use yii\web\View;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Webinar */
 
-$this->title = 'Update WebinarSearch: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Webinars', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+echo Breadcrumbs::widget([
+    'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>",
+    'links' => [
+        ['label' => 'Вебинары', 'url' => ['index']],
+        [
+            'label' => 'Редактирование вебинара',
+            'template' => "<li class='breadcrumb-item'>{link}</li>", // template for this link only
+        ],
+
+    ],
+    'homeLink' => false
+]);
 ?>
-<div class="webinar-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+<h1><span class="blue">Редактирование вебинара:</span></h1>
+<?= $this->render('_form_update', [
+    'model' => $model,
+]) ?>

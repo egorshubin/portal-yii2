@@ -8,7 +8,7 @@ $controller_id = Yii::$app->controller->id;
 
 <div class="panel-edit clearfix">
     <div class="panel-point left save">
-        <?= Html::submitButton('<i class="fa fa-floppy-o light-blue save-icon" aria-hidden="true"></i><div class="clearfix"></div>
+        <?= Html::button('<i class="fa fa-floppy-o light-blue save-icon" aria-hidden="true"></i><div class="clearfix"></div>
         <span class="subscription">Сохранить</span>', ['class' => 'button-save-wrap']) ?>
     </div>
     <?php
@@ -30,19 +30,21 @@ $controller_id = Yii::$app->controller->id;
         <div class="clearfix"></div>
         <span class="subscription">Закрыть</span>
     </a>
-    <?=
-    Html::a('<i class="fa fa-trash-o light-gray" aria-hidden="true"></i>
+    <? if (!empty($model->id)) {
+        echo Html::a('<i class="fa fa-trash-o light-gray" aria-hidden="true"></i>
         <div class="clearfix"></div>
         <span class="subscription">Удалить</span>',
-        ['delete', 'id' => $model->id],
-        [
-            'class' => 'panel-point right archive-panel',
-            'title' => "Удалить в корзину",
-            'data' => [
-                'confirm' => 'Вы уверены, что хотите удалить?',
-                'method' => 'post',
-            ],
-        ]);
+            ['delete', 'id' => $model->id],
+            [
+                'class' => 'panel-point right archive-panel',
+                'title' => "Удалить в корзину",
+                'data' => [
+                    'confirm' => 'Вы уверены, что хотите удалить?',
+                    'method' => 'post',
+                ],
+            ]);
+    }
+
     ?>
 
     <?php

@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use app\helpers\CustomHelper;
 use Yii;
+use yii\web\UploadedFile;
 
 /**
  * This is the model class for table "webinar".
@@ -22,9 +24,20 @@ use Yii;
  * @property Manager $manager
  * @property Type $typeF
  * @property string $type
+ * @property UploadedFile $download
+ * @property array $categories
+ * @property array $checkedIds
  */
 class Webinar extends \yii\db\ActiveRecord
 {
+    /**
+     * @var UploadedFile
+     */
+    public $download;
+
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -45,10 +58,10 @@ class Webinar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'video'], 'required'],
-            [['title', 'content'], 'string'],
+            [['title'], 'required'],
+            [['title', 'content', 'video'], 'string'],
             [['manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
-            [['video'], 'string', 'max' => 255],
+            [['download'], 'file', 'skipOnEmpty' => true, 'extensions' => 'mp4', 'maxSize' => CustomHelper::getSizeLimitBytes()],
             [['manager_id'], 'exist', 'skipOnError' => true, 'targetClass' => Manager::className(), 'targetAttribute' => ['manager_id' => 'id']],
             [['type_f'], 'exist', 'skipOnError' => true, 'targetClass' => Type::className(), 'targetAttribute' => ['type_f' => 'id']],
         ];
@@ -98,5 +111,73 @@ class Webinar extends \yii\db\ActiveRecord
     }
     public function getType() {
         return $this->getTypeF()->one()->attributes['db_name'];
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->updated_at,'php:d.m.Y');
+    }
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getManagers() {
+        return Manager::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    public function getCategories() {
+        return Category::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    public function getCheckedIds() {
+        $rawArray = $this->getCategoryWebinars()->all();
+        $checkedIds = [];
+        foreach ($rawArray as $row) {
+            $checkedIds[] = $row->attributes['parent_id'];
+        }
+        return $checkedIds;
+    }
+
+    public function saveCheckedIds($checkedIds) {
+        if ($checkedIds) {
+            $model = CategoryWebinar::find();
+            $oldArray = $model
+                ->where('unit_id = ' . $this->id)
+                ->all();
+            foreach ($oldArray as $row) {
+                $row->delete();
+            }
+            foreach ($checkedIds as $catid) {
+                $m= new CategoryWebinar();
+                $m->unit_id = $this->id;
+                $m->parent_id = $catid;
+                $m->save();
+            }
+
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @return bool
+     */
+    public function upload()
+    {
+        if ($this->validate()) {
+            $baseName = Yii::$app->transliter->translate($this->download->baseName) . '_' . rand(0, 99);
+
+            $this->download->saveAs('webinars/' . $baseName  . '.' . $this->download->extension);
+            return $baseName  . '.' . $this->download->extension;
+        } else {
+            return false;
+        }
     }
 }
