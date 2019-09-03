@@ -120,7 +120,18 @@ class EventController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $filename = $model->document;
+        if ($filename != null && $filename != '') {
+            try {
+                unlink('uploads/' . $filename);
+            }
+            catch (\Exception $e) {
+                echo $e->getMessage();
+            }
+        }
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
