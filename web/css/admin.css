@@ -833,13 +833,16 @@ select.form-control.month-select{
     }
 }
 
-.class-for-updated-at-field, .button-save-wrap {
+.class-for-updated-at-field, .button-save-wrap, .current_invitation_file {
     border: none;
     background: transparent;
 }
-.class-for-updated-at-field:focus, .button-save-wrap {
+.class-for-updated-at-field:focus, .button-save-wrap:focus, .current_invitation_file:focus {
     border: none;
     outline: none;
+}
+.current_invitation_file {
+    width: 100%;
 }
 .button-save-wrap {
     cursor: pointer
@@ -852,4 +855,8 @@ select.form-control.month-select{
     background: #fff;
     padding: 15px 15px 0;
     margin-bottom: 30px;
+}
+
+.checklist label {
+    display: block;
 }

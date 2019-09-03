@@ -25,6 +25,8 @@ use yii\web\UploadedFile;
  * @property Type $typeF
  * @property string $type
  * @property UploadedFile $download
+ * @property array $categories
+ * @property array $checkedIds
  */
 class Event extends \yii\db\ActiveRecord
 {
@@ -130,6 +132,42 @@ class Event extends \yii\db\ActiveRecord
         return Manager::find()
             ->indexBy('id')
             ->all();
+    }
+
+    public function getCategories() {
+        return Category::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    public function getCheckedIds() {
+        $rawArray = $this->getCategoryEvents()->all();
+        $checkedIds = [];
+        foreach ($rawArray as $row) {
+           $checkedIds[] = $row->attributes['parent_id'];
+        }
+        return $checkedIds;
+    }
+
+    public function saveCheckedIds($checkedIds) {
+        if ($checkedIds) {
+            $model = CategoryEvent::find();
+            $oldArray = $model
+                ->where('unit_id = ' . $this->id)
+                ->all();
+            foreach ($oldArray as $row) {
+                $row->delete();
+            }
+            foreach ($checkedIds as $catid) {
+                $m= new CategoryEvent();
+                $m->unit_id = $this->id;
+                $m->parent_id = $catid;
+                $m->save();
+            }
+
+            return true;
+        }
+       return false;
     }
 
     /**

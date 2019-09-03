@@ -87,7 +87,7 @@ class EventController extends Controller
             $post['Event']['document'] = $docname;
 
         }
-        if ($model->load($post) && $model->save()) {
+        if ($model->saveCheckedIds($post['Event']['checkedIds']) && $model->load($post) && $model->save()) {
             return $this->redirect(['update', 'id' => $model->id]);
         }
         return $this->render('update', [
