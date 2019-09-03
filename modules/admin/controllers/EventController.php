@@ -54,9 +54,7 @@ class EventController extends Controller
     {
         $model = new Event();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
 
         return $this->render('create', [
             'model' => $model,
@@ -73,6 +71,13 @@ class EventController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $this->actionSave($model);
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    protected function actionSave($model) {
         $post = Yii::$app->request->post();
         if ($docname = $this->actionUpload($model)) {
             $postDoc = $post['Event']['document'];
@@ -87,19 +92,16 @@ class EventController extends Controller
             $post['Event']['document'] = $docname;
 
         }
-        if ($model->saveCheckedIds($post['Event']['checkedIds']) && $model->load($post) && $model->save()) {
+        if ($model->load($post) && $model->save() && $model->saveCheckedIds($post['Event']['checkedIds'])) {
             return $this->redirect(['update', 'id' => $model->id]);
         }
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
      * @param $model
      * @return bool
      */
-    public function actionUpload($model)
+    protected function actionUpload($model)
     {
         if (Yii::$app->request->isPost && $model->download = UploadedFile::getInstance($model, 'download')) {
             if ($name = $model->upload()) {

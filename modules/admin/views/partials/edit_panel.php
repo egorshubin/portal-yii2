@@ -15,7 +15,7 @@ $controller_id = Yii::$app->controller->id;
     if (!empty($model->id) && $model->status_id == '1' && (($model->type_f == 1) || ($model->type_f == 2) || ($model->type_f == 3))) {
         ?>
         <a class="panel-point left save-see"
-           href="<?= Yii::$app->urlManager->createAbsoluteUrl(['category/view', 'id' => $model->id]) ?>"
+           href="<?= Yii::$app->urlManager->createAbsoluteUrl([$controller_id . '/view', 'id' => $model->id]) ?>"
            target="_blank">
             <i class="fa fa-eye light-blue" aria-hidden="true"></i>
             <div class="clearfix"></div>
