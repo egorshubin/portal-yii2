@@ -21,9 +21,14 @@ use Yii;
  * @property Type $typeF
  * @property string $type
  * @property PaperissueTie[] $paperissueTies
+ * @property array $categories
+ * @property array $checkedIds
  */
 class Paper extends \yii\db\ActiveRecord
 {
+    /**
+     * @return array
+     */
     public function behaviors()
     {
         return [
@@ -91,8 +96,77 @@ class Paper extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
     }
+
+    /**
+     * @return mixed
+     */
     public function getType() {
         return $this->getTypeF()->one()->attributes['db_name'];
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->updated_at,'php:d.m.Y');
+    }
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getManagers() {
+        return Manager::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public function getCategories() {
+        return Category::find()
+            ->indexBy('id')
+            ->all();
+    }
+
+    /**
+     * @return array
+     */
+    public function getCheckedIds() {
+        $rawArray = $this->getCategoryPapers()->all();
+        $checkedIds = [];
+        foreach ($rawArray as $row) {
+            $checkedIds[] = $row->attributes['parent_id'];
+        }
+        return $checkedIds;
+    }
+
+    /**
+     * @param $checkedIds
+     * @return bool
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function saveCheckedIds($checkedIds) {
+        if ($checkedIds) {
+            $model = CategoryPaper::find();
+            $oldArray = $model
+                ->where('unit_id = ' . $this->id)
+                ->all();
+            foreach ($oldArray as $row) {
+                $row->delete();
+            }
+            foreach ($checkedIds as $catid) {
+                $m= new CategoryPaper();
+                $m->unit_id = $this->id;
+                $m->parent_id = $catid;
+                $m->save();
+            }
+
+            return true;
+        }
+        return false;
     }
 
     /**

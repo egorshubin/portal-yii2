@@ -12,7 +12,7 @@ $controller_id = Yii::$app->controller->id;
         <span class="subscription">Сохранить</span>', ['class' => 'button-blue button-m left-fa button-margin-right left save save-button', 'title' => 'Сохранить']) ?>
 
     <?php
-    if (!empty($model->id) && $model->status_id == '1' && (($model->type_f == 1) || ($model->type_f == 2) || ($model->type_f == 3))) {
+    if (!empty($model->id) && $model->status_id == '1' && (($model->type_f == 1) || ($model->type_f == 2) || ($model->type_f == 3) || ($model->type_f == 7))) {
         ?>
         <a class="panel-icon left button-margin-right save-see"
            href="<?= Yii::$app->urlManager->createAbsoluteUrl([$controller_id . '/view', 'id' => $model->id]) ?>"

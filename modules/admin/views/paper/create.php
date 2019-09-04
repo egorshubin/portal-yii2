@@ -1,20 +1,29 @@
 <?php
 
+use app\models\Paper;
 use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Paper */
 
-$this->title = 'Create PaperSearch';
-$this->params['breadcrumbs'][] = ['label' => 'Papers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+echo Breadcrumbs::widget([
+    'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>",
+    'links' => [
+        ['label' => 'Газеты', 'url' => ['index']],
+        [
+            'label' => 'Создание газеты',
+            'template' => "<li class='breadcrumb-item'>{link}</li>", // template for this link only
+        ],
+
+    ],
+    'homeLink' => false
+]);
 ?>
-<div class="paper-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><span class="blue">Создание газеты</span> </h1>
+<?= $this->render('_form_create', [
+    'model' => $model,
+]) ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>

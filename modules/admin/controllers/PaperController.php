@@ -53,9 +53,7 @@ class PaperController extends Controller
     {
         $model = new Paper();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
 
         return $this->render('create', [
             'model' => $model,
@@ -73,13 +71,22 @@ class PaperController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
 
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    /**
+     * @param $model
+     * @return \yii\web\Response
+     */
+    protected function actionSave($model) {
+        $post = Yii::$app->request->post();
+        if ($model->load($post) && $model->save() && $model->saveCheckedIds($post['Paper']['checkedIds'])) {
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
     }
 
     /**
@@ -94,6 +101,34 @@ class PaperController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    /**
+     * @param $id
+     * @param $redirect
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionPublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 1;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
+    }
+
+    /**
+     * @param $id
+     * @param $redirect
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     */
+    public function actionUnpublish($id, $redirect) {
+        $model = $this->findModel($id);
+        $model->status_id = 0;
+        if ($model->save()) {
+            return $this->redirect([$redirect]);
+        }
     }
 
     /**
