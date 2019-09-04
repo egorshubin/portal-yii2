@@ -1,49 +1,34 @@
 <?php
 
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
-use yii\grid\GridView;
-use yii\widgets\Pjax;
+use yii\web\View;
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\ManagerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Managers';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Менеджеры';
 ?>
-<div class="manager-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<h1><span class="blue"><?= Html::encode($this->title) ?></span></h1>
 
-    <p>
-        <?= Html::a('Create ManagerSearch', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
-    <?php Pjax::begin(); ?>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'image',
-            'company',
-            'address',
-            //'email:email',
-            //'site',
-            //'phone',
-            //'phone_time',
-            //'type_f',
-            //'created_at',
-            //'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
-
-    <?php Pjax::end(); ?>
-
+<div class="add-action-wrapper">
+    <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i> Создать', ['create'], ['class' => 'button-blue button-l left-fa']) ?>
 </div>
+
+<?= \yii\widgets\ListView::widget(
+    [
+        'dataProvider' => $dataProvider,
+        'itemView' => '_list_item',
+        'options' => [
+            'tag' => 'ul',
+            'class' => 'products-list'
+        ],
+        'itemOptions' => [
+            'tag' => 'li',
+            'class' => 'category-border clearfix'
+        ],
+        'summary' => ''
+    ]
+)
+?>
+

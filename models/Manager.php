@@ -2,7 +2,14 @@
 
 namespace app\models;
 
+use app\helpers\CustomHelper;
 use Yii;
+use yii\web\UploadedFile;
+use yii\imagine\Image;
+use Imagine\Gd;
+use Imagine\Image\Box;
+use Imagine\Image\BoxInterface;
+
 
 /**
  * This is the model class for table "manager".
@@ -19,19 +26,27 @@ use Yii;
  * @property int $type_f
  * @property int $created_at
  * @property int $updated_at
+ * @property int $status_id
  *
  * @property Category[] $categories
  * @property Event[] $events
  * @property Type $typeF
  * @property Paper[] $papers
  * @property Webinar[] $webinars
+ * @property string $type
+ * @property UploadedFile $download
  */
 class Manager extends \yii\db\ActiveRecord
 {
+    /**
+     * @var UploadedFile
+     */
+    public $download;
+
     public function behaviors()
     {
         return [
-            yii\behaviors\TimestampBehavior::className(),
+            \yii\behaviors\TimestampBehavior::className(),
         ];
     }
     /**
@@ -48,9 +63,10 @@ class Manager extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'image'], 'required'],
-            [['type_f', 'created_at', 'updated_at'], 'integer'],
-            [['title', 'image', 'address'], 'string', 'max' => 255],
+            [['title', 'company', 'email', 'phone_time', 'address', 'site', 'phone'], 'required'],
+            [['type_f', 'status_id', 'created_at', 'updated_at'], 'integer'],
+            [['title', 'address', 'image'], 'string', 'max' => 255],
+            [['download'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxSize' => CustomHelper::getSizeLimitBytes()],
             [['company'], 'string', 'max' => 50],
             [['email', 'phone_time'], 'string', 'max' => 60],
             [['site', 'phone'], 'string', 'max' => 20],
@@ -74,6 +90,7 @@ class Manager extends \yii\db\ActiveRecord
             'phone' => 'Phone',
             'phone_time' => 'Phone Time',
             'type_f' => 'Type F',
+            'status_id' => 'Status Id',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
@@ -104,6 +121,13 @@ class Manager extends \yii\db\ActiveRecord
     }
 
     /**
+     * @return mixed
+     */
+    public function getType() {
+        return $this->getTypeF()->one()->attributes['db_name'];
+    }
+
+    /**
      * @return \yii\db\ActiveQuery
      */
     public function getPapers()
@@ -117,5 +141,49 @@ class Manager extends \yii\db\ActiveRecord
     public function getWebinars()
     {
         return $this->hasMany(Webinar::className(), ['manager_id' => 'id']);
+    }
+
+    /**
+     * @return string
+     * @throws \yii\base\InvalidConfigException
+     */
+    public function getDate()
+    {
+        return Yii::$app->formatter->asDatetime($this->updated_at,'php:d.m.Y');
+    }
+
+    /**
+     * @return bool
+     */
+    public function upload()
+    {
+
+        if ($this->download) {
+            $baseName = Yii::$app->transliter->translate($this->download->baseName) . '_' . rand(0, 99);
+
+            $nameAndExtension = $baseName  . '.' . $this->download->extension;
+            $fileName = 'manager_images/original/' . $nameAndExtension;
+            $this->download->saveAs($fileName);
+            $img = Image::getImagine()->open($fileName);
+
+            $size = $img->getSize();
+            $currentWidth = $size->getWidth();
+            if ($currentWidth != 50) {
+                $ratio = $currentWidth/$size->getHeight();
+                $width = 50;
+                $height = round($width/$ratio);
+
+                $box = new Box($width, $height);
+                $img->resize($box)->save('manager_images/' . $nameAndExtension, ['quality' => 100]);
+            }
+            else {
+                copy($fileName, 'manager_images/' . $nameAndExtension);
+                @unlink($fileName);
+            }
+
+            return $nameAndExtension;
+        } else {
+            return false;
+        }
     }
 }

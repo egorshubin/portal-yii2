@@ -87,6 +87,9 @@ class WebinarController extends Controller
     protected function actionSave($model) {
         $post = Yii::$app->request->post();
         if ($docname = $this->actionUpload($model)) {
+            if (!$post['Webinar']['video']) {
+                $post['Webinar'] += ['video' => ''];
+            }
             $postDoc = $post['Webinar']['video'];
             if ($postDoc != '' && $postDoc != null) {
                 @unlink('webinars/' . $postDoc);

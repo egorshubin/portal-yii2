@@ -17,7 +17,7 @@ class ManagerSearch extends ManagerModel
     public function rules()
     {
         return [
-            [['id', 'type_f', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'type_f', 'status_id', 'created_at', 'updated_at'], 'integer'],
             [['title', 'image', 'company', 'address', 'email', 'site', 'phone', 'phone_time'], 'safe'],
         ];
     }

@@ -84,6 +84,9 @@ class EventController extends Controller
     protected function actionSave($model) {
         $post = Yii::$app->request->post();
         if ($docname = $this->actionUpload($model)) {
+            if (!$post['Event']['document']) {
+                $post['Event'] += ['document' => ''];
+            }
             $postDoc = $post['Event']['document'];
             if ($postDoc != '' && $postDoc != null) {
                 @unlink('uploads/' . $postDoc);

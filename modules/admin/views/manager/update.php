@@ -1,21 +1,26 @@
 <?php
 
 use yii\helpers\Html;
+use yii\widgets\Breadcrumbs;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Manager */
 
-$this->title = 'Update Manager: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Managers', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+echo Breadcrumbs::widget([
+    'itemTemplate' => "<li class='breadcrumb-item'>{link}</li>",
+    'links' => [
+        ['label' => 'Менеджеры', 'url' => ['index']],
+        [
+            'label' => 'Редактирование менеджера',
+            'template' => "<li class='breadcrumb-item'>{link}</li>", // template for this link only
+        ],
+
+    ],
+    'homeLink' => false
+]);
 ?>
-<div class="manager-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
-</div>
+<h1><span class="blue">Редактирование менеджера:</span></h1>
+<?= $this->render('_form_update', [
+    'model' => $model,
+]) ?>

@@ -171,7 +171,7 @@ class Webinar extends \yii\db\ActiveRecord
      */
     public function upload()
     {
-        if ($this->validate()) {
+        if ($this->download) {
             $baseName = Yii::$app->transliter->translate($this->download->baseName) . '_' . rand(0, 99);
 
             $this->download->saveAs('webinars/' . $baseName  . '.' . $this->download->extension);

@@ -59,7 +59,7 @@ class Event extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content'], 'required'],
+            [['title'], 'required'],
             [['title', 'content', 'document'], 'string'],
             [['manager_id', 'status_id', 'arrangement', 'type_f', 'created_at', 'updated_at'], 'integer'],
             [['download'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, pdf, doc, docx, rtf, odt', 'maxSize' => CustomHelper::getSizeLimitBytes()],
@@ -175,7 +175,7 @@ class Event extends \yii\db\ActiveRecord
      */
     public function upload()
     {
-        if ($this->validate()) {
+        if ($this->download) {
             $baseName = Yii::$app->transliter->translate($this->download->baseName) . '_' . rand(0, 99);
 
             $this->download->saveAs('uploads/' . $baseName  . '.' . $this->download->extension);
