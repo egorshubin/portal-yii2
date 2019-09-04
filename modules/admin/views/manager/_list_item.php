@@ -17,9 +17,11 @@ $this->title = $model->title;
     'attributes' => [
         'title',
         'status_id',
-        'type'
+        'type',
+        'type_f'
     ],
     'template' => '{value}',
     'hashref' => false,
+    'publishAllowed' => false
 ]) ?>
 

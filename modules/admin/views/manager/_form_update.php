@@ -15,7 +15,13 @@ use yii\widgets\ActiveForm;
     <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>
 </div>
 
-<?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Название<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 1]) ?>
+<?php
+if ($model->id == '1') {
+    echo '<p class="man-no-delete">Это менеджер, которого нельзя удалить. Других можно.<br>На него переводятся все страницы, к которым были привязаны все другие удаленные менеджеры.</p>';
+}
+?>
+
+<?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Имя<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 1]) ?>
 
 <?php if($model->attributes['image'] != '' && $model->attributes['image'] != null) {
     echo $form->field($model, 'image', ['options' => ['class' => 'form-group']])->label('Текущая фотография:', ['class' => 'form-block-header'])->textInput(['class' => 'current_invitation_file', 'readonly' => true]);

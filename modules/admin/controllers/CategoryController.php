@@ -99,6 +99,13 @@ class CategoryController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        $dbsArray = [
+            'category_category', 'category_event', 'category_paper', 'category_webinar'
+        ];
+        foreach ($dbsArray as $db) {
+            \yii::$app->db->createCommand("DELETE FROM " . $db . " WHERE parent_id = :id", [':id' => $id])->execute();
+        }
+        \yii::$app->db->createCommand("DELETE FROM category_category WHERE unit_id = :id", [':id' => $id])->execute();
 
         return $this->redirect(['index']);
     }

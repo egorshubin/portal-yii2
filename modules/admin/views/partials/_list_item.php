@@ -21,4 +21,5 @@ $this->title = $model->title;
         ],
         'template' => '{value}',
         'hashref' => true,
+        'publishAllowed' => true
     ]) ?>

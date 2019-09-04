@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
     <?= $this->render('@partials/edit_panel', ['model' => $model]); ?>
 </div>
 
-<?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Название<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 1]) ?>
+<?= $form->field($model, 'title', ['options' => ['class' => 'form-group']])->label('Имя<span class="gray">*</span>', ['class' => 'form-block-header'])->textarea(['rows' => 1]) ?>
 
 <?= $form->field($model, 'download', ['options' => ['class' => 'form-group']])->label('Загрузить фотографию:<span class="gray">*</span>', ['class' => 'form-block-header'])->fileInput()?>
 <div class="little">Формат jpg, png<br>

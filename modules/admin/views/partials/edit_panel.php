@@ -26,7 +26,8 @@ $controller_id = Yii::$app->controller->id;
     <a class="panel-icon left button-margin-right close-link" href="<?= Url::base() ?>/admin/<?= $controller_id ?>/index" title="Закрыть страницу">
         <i class="fa fa-times light-gray" aria-hidden="true"></i>
     </a>
-    <? if (!empty($model->id)) {
+    <?php //if not the first manager
+     if ((!empty($model->id) && $model->id != '1' && $model->type_f != '5') || ($model->id != '1' && $model->type_f == '5')) {
         echo Html::a('<i class="fa fa-trash-o light-gray" aria-hidden="true"></i>',
             ['delete', 'id' => $model->id],
             [
@@ -42,7 +43,8 @@ $controller_id = Yii::$app->controller->id;
     ?>
 
     <?php
-    if ($model->status_id == '1') {
+    //if not the manager
+    if ($model->status_id == '1' && $model->type_f != '5') {
         echo Html::a('<i class="fa fa-toggle-on light-blue" aria-hidden="true"></i>',
             ['unpublish', 'id' => $model->id, 'redirect' => Yii::$app->urlManager->createUrl([ '/admin/' . $controller_id . '/update', 'id' => $model->id])],
             [
@@ -52,7 +54,7 @@ $controller_id = Yii::$app->controller->id;
                 'method' => 'post',
             ],
         ]);
-    } else if ($model->status_id == '0') {
+    } else if ($model->status_id == '0' && $model->type_f != '5') {
         echo Html::a('<i class="fa fa-toggle-off light-gray" aria-hidden="true"></i>', ['publish', 'id' => $model->id, 'redirect' => Yii::$app->urlManager->createUrl([ '/admin/' . $controller_id . '/update', 'id' => $model->id])], [
             'title' => 'Опубликовать',
             'class' => 'panel-icon button-margin-right right publishing publish',

@@ -150,13 +150,7 @@ class Paper extends \yii\db\ActiveRecord
      */
     public function saveCheckedIds($checkedIds) {
         if ($checkedIds) {
-            $model = CategoryPaper::find();
-            $oldArray = $model
-                ->where('unit_id = ' . $this->id)
-                ->all();
-            foreach ($oldArray as $row) {
-                $row->delete();
-            }
+            $this->deleteFromCategoryPaper();
             foreach ($checkedIds as $catid) {
                 $m= new CategoryPaper();
                 $m->unit_id = $this->id;
@@ -167,6 +161,16 @@ class Paper extends \yii\db\ActiveRecord
             return true;
         }
         return false;
+    }
+
+    public function deleteFromCategoryPaper() {
+        $model = CategoryPaper::find();
+        $oldArray = $model
+            ->where('unit_id = ' . $this->id)
+            ->all();
+        foreach ($oldArray as $row) {
+            $row->delete();
+        }
     }
 
     /**

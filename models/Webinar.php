@@ -109,6 +109,10 @@ class Webinar extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Type::className(), ['id' => 'type_f']);
     }
+
+    /**
+     * @return mixed
+     */
     public function getType() {
         return $this->getTypeF()->one()->attributes['db_name'];
     }
@@ -130,12 +134,18 @@ class Webinar extends \yii\db\ActiveRecord
             ->all();
     }
 
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getCategories() {
         return Category::find()
             ->indexBy('id')
             ->all();
     }
 
+    /**
+     * @return array
+     */
     public function getCheckedIds() {
         $rawArray = $this->getCategoryWebinars()->all();
         $checkedIds = [];
@@ -145,15 +155,15 @@ class Webinar extends \yii\db\ActiveRecord
         return $checkedIds;
     }
 
+    /**
+     * @param $checkedIds
+     * @return bool
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function saveCheckedIds($checkedIds) {
         if ($checkedIds) {
-            $model = CategoryWebinar::find();
-            $oldArray = $model
-                ->where('unit_id = ' . $this->id)
-                ->all();
-            foreach ($oldArray as $row) {
-                $row->delete();
-            }
+            $this->deleteFromCategoryWebinar();
             foreach ($checkedIds as $catid) {
                 $m= new CategoryWebinar();
                 $m->unit_id = $this->id;
@@ -164,6 +174,20 @@ class Webinar extends \yii\db\ActiveRecord
             return true;
         }
         return false;
+    }
+
+    /**
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function deleteFromCategoryWebinar() {
+        $model = CategoryWebinar::find();
+        $oldArray = $model
+            ->where('unit_id = ' . $this->id)
+            ->all();
+        foreach ($oldArray as $row) {
+            $row->delete();
+        }
     }
 
     /**

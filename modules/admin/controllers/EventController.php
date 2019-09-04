@@ -129,8 +129,9 @@ class EventController extends Controller
         if ($filename != null && $filename != '') {
             @unlink('uploads/' . $filename);
         }
-
+        $model->deleteFromCategoryEvent();
         $model->delete();
+
 
         return $this->redirect(['index']);
     }

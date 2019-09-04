@@ -3,12 +3,15 @@ use yii\helpers\Html;
 
 $edit = Html::a('<i class="edit-icon fa fa-pencil" aria-hidden="true"></i>' . $attributes['title'], ['/admin/' . $attributes['type'] . '/update', 'id' => $model->id], ['class' => 'list-title-block']);
 
-$delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['delete', 'id' => $model->id], [
-    'data' => [
-        'confirm' => 'Вы уверены, что хотите удалить?',
-        'method' => 'post',
-    ],
-]);
+if (($model->id != '1' && $attributes['type_f'] != '5') || ($model->id != '1' && $attributes['type_f'] == '5')) {
+    $delete = Html::a('<i class="delete-icon fa fa-trash gray archive"></i>', ['delete', 'id' => $model->id], [
+        'data' => [
+            'confirm' => 'Вы уверены, что хотите удалить?',
+            'method' => 'post',
+        ],
+    ]);
+}
+
 
 if ($attributes['status_id'] == 1) {
     $publish = Html::a('<i class="status-icon fa unpublish fa-toggle-on blue" aria-hidden="true"></i>', ['unpublish', 'id' => $model->id, 'redirect' => 'index'], [
@@ -41,8 +44,11 @@ $lookout = Html::tag('div', '', ['class' => 'clearfix']) .
 echo
     $edit .
     '<span class="list-buttons-block">' .
-     $delete .
-    $publish . '</span>';
+     $delete;
+if ($publishAllowed) {
+    echo $publish;
+}
+    echo '</span>';
 if ($hashref) {
     echo $lookout;
 }

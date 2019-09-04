@@ -134,12 +134,18 @@ class Event extends \yii\db\ActiveRecord
             ->all();
     }
 
+    /**
+     * @return array|\yii\db\ActiveRecord[]
+     */
     public function getCategories() {
         return Category::find()
             ->indexBy('id')
             ->all();
     }
 
+    /**
+     * @return array
+     */
     public function getCheckedIds() {
         $rawArray = $this->getCategoryEvents()->all();
         $checkedIds = [];
@@ -149,15 +155,13 @@ class Event extends \yii\db\ActiveRecord
         return $checkedIds;
     }
 
+    /**
+     * @param $checkedIds
+     * @return bool
+     */
     public function saveCheckedIds($checkedIds) {
         if ($checkedIds) {
-            $model = CategoryEvent::find();
-            $oldArray = $model
-                ->where('unit_id = ' . $this->id)
-                ->all();
-            foreach ($oldArray as $row) {
-                $row->delete();
-            }
+            $this->deleteFromCategoryEvent();
             foreach ($checkedIds as $catid) {
                 $m= new CategoryEvent();
                 $m->unit_id = $this->id;
@@ -168,6 +172,20 @@ class Event extends \yii\db\ActiveRecord
             return true;
         }
        return false;
+    }
+
+    /**
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
+    public function deleteFromCategoryEvent() {
+        $model = CategoryEvent::find();
+        $oldArray = $model
+            ->where('unit_id = ' . $this->id)
+            ->all();
+        foreach ($oldArray as $row) {
+            $row->delete();
+        }
     }
 
     /**

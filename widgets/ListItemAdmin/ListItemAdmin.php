@@ -10,6 +10,7 @@ use yii\widgets\DetailView;
 class ListItemAdmin extends DetailView
 {
     public $hashref;
+    public $publishAllowed;
     public function run()
     {
         $rows = [];
@@ -17,6 +18,6 @@ class ListItemAdmin extends DetailView
         foreach ($this->attributes as $attribute) {
             $rows[$attribute['attribute']] = $this->renderAttribute($attribute, $i++);
         }
-        return $this->render('list_item_admin', ['model' => $this->model, 'attributes' => $rows, 'hashref' => $this->hashref]);
+        return $this->render('list_item_admin', ['model' => $this->model, 'attributes' => $rows, 'hashref' => $this->hashref, 'publishAllowed' => $this->publishAllowed]);
     }
 }

@@ -137,35 +137,14 @@ class ManagerController extends Controller
 
         $model->delete();
 
+        $dbsArray = [
+          'category', 'event', 'paper', 'webinar'
+        ];
+        foreach ($dbsArray as $db) {
+            \yii::$app->db->createCommand("UPDATE " . $db . " SET manager_id = 1 where manager_id = :id", [':id' => $id])->execute();
+        }
+
         return $this->redirect(['index']);
-    }
-
-    /**
-     * @param $id
-     * @param $redirect
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionPublish($id, $redirect) {
-        $model = $this->findModel($id);
-        $model->status_id = 1;
-        if ($model->save()) {
-            return $this->redirect([$redirect]);
-        }
-    }
-
-    /**
-     * @param $id
-     * @param $redirect
-     * @return \yii\web\Response
-     * @throws NotFoundHttpException
-     */
-    public function actionUnpublish($id, $redirect) {
-        $model = $this->findModel($id);
-        $model->status_id = 0;
-        if ($model->save()) {
-            return $this->redirect([$redirect]);
-        }
     }
 
     /**

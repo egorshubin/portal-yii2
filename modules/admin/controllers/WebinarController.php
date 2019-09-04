@@ -132,7 +132,7 @@ class WebinarController extends Controller
         if ($filename != null && $filename != '') {
             @unlink('webinars/' . $filename);
         }
-
+        $model->deleteFromCategoryWebinar();
         $model->delete();
 
         return $this->redirect(['index']);
