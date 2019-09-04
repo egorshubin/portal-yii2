@@ -45,7 +45,7 @@ jQuery(document).ready(function ($) {
     );
 
     /* Внешний вид иконки статуса при наведении в панели создания и редактирования мероприятия*/
-    $('.panel-point.publishing').hover(
+    $('.panel-icon.publishing').hover(
         function () {
             if ($(this).find('.fa').hasClass('fa-toggle-off')) {
                 $(this).find('.fa').removeClass('fa-toggle-off').addClass('fa-toggle-on').removeClass('light-gray').addClass('light-blue');
