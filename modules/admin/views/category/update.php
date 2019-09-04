@@ -26,7 +26,7 @@ echo Breadcrumbs::widget([
 
 <h1><?= '<span class="blue">Редактирование категории:</span><br>' . Html::encode($this->title) ?></h1>
 <?=
-    $this->render('list_tabs_wrapper');
+    $this->render('@partials/list_tabs_wrapper');
 ?>
 <div id="category-description-wrapper" class="category-description-wrapper">
     <?= $this->render('_form_update', [

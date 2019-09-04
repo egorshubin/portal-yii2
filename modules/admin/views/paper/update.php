@@ -20,7 +20,19 @@ echo Breadcrumbs::widget([
 ]);
 ?>
 
-<h1><span class="blue">Газета</span> <?=Html::encode($this->title)?></h1>
+<h1><span class="blue">Газета</span><br> <?=Html::encode($this->title)?></h1>
+<?=
+$this->render('@partials/list_tabs_wrapper');
+?>
+<div id="category-description-wrapper" class="category-description-wrapper">
 <?= $this->render('_form_update', [
     'model' => $model,
 ]) ?>
+</div>
+<div id="category-list-wrapper" class="opened-body">
+    <?= $this->render('issues_list', [
+        'paper_id' => $model->id,
+        'years' => $years,
+        'paperissues' => $paperissues
+    ]) ?>
+</div>

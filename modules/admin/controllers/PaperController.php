@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Paperyear;
 use Yii;
 use app\models\Paper;
 use app\models\search\PaperSearch as PaperSearch;
@@ -73,8 +74,13 @@ class PaperController extends Controller
 
         $this->actionSave($model);
 
+        $years = \yii::$app->db->createCommand("SELECT year_f FROM paper_year ORDER BY year_f DESC")->queryAll();
+        $paperissues = \yii::$app->db->createCommand("SELECT id, title FROM paperissue WHERE year_f = " . $years[0]['year_f'] . " ORDER BY month_f DESC")->queryAll();
+
         return $this->render('update', [
             'model' => $model,
+            'years' => $years,
+            'paperissues' => $paperissues
         ]);
     }
 

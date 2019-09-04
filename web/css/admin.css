@@ -835,3 +835,9 @@ select.form-control.month-select{
     padding: 15px;
     border: 2px solid #15A5FA;
 }
+.month-select select, .month-select input {
+    width: 75px;
+}
+.create-icon {
+    margin-top: 2px;
+}

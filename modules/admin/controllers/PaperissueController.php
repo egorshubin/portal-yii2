@@ -2,12 +2,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Paper;
 use Yii;
 use app\models\Paperissue;
 use app\models\search\PaperissueSearch as PaperissueSearch;
+use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * PaperissueController implements the CRUD actions for PaperissueSearch model.
@@ -29,32 +32,25 @@ class PaperissueController extends Controller
         ];
     }
 
-    /**
-     * Lists all PaperissueSearch models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new PaperissueSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+    public function actionLoadbyyear() {
+        if ($request = Yii::$app->request->post('data')) {
+            $request_array = explode('/', $request);
+            $year = $request_array[0];
+            $id = $request_array[1];
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
+            $paperissues = \yii::$app->db->createCommand("SELECT id, title FROM paperissue WHERE year_f = " . $year. " AND paper_id = " . $id . " ORDER BY month_f DESC")->queryAll();
 
-    /**
-     * Displays a single PaperissueSearch model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+            $string = '';
+
+            foreach ($paperissues as $paperissue) {
+                $string .= '<li class="papers-list-item">';
+                $string .= Html::a('<i class="edit-icon fa fa-pencil" aria-hidden="true"></i>' . $paperissue['title'], ['/admin/paperissue/update', 'id' => $paperissue['id'], 'paper_id' => $id], ['title' => 'Редактировать']);
+                $string .= Html::a('<i class="delete-paper-icon fa fa-trash gray delete-forever"></i>', ['/admin/paperissue/delete', 'id' => $paperissue['id'], 'paper_id' => $id], ['title' => 'Удалить']);
+                $string .= '</li>';
+            }
+
+            return $string;
+        }
     }
 
     /**
@@ -62,16 +58,18 @@ class PaperissueController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($paper_id = null)
     {
         $model = new Paperissue();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $this->actionSave($model);
+
+        $paper_title = Paper::findOne($paper_id)->title;
 
         return $this->render('create', [
             'model' => $model,
+            'paper_id' => $paper_id,
+            'paper_title' => $paper_title
         ]);
     }
 
@@ -82,17 +80,55 @@ class PaperissueController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($id, $paper_id = null)
     {
         $model = $this->findModel($id);
+        $this->actionSave($model);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
+        $paper_title = Paper::findOne($paper_id)->title;
         return $this->render('update', [
             'model' => $model,
+            'paper_id' => $paper_id,
+            'paper_title' => $paper_title
         ]);
+    }
+
+    /**
+     * @param $model
+     * @return \yii\web\Response
+     */
+    protected function actionSave($model) {
+        $post = Yii::$app->request->post();
+        if ($docname = $this->actionUpload($model)) {
+            if (!$post['Paperissue']['document']) {
+                $post['Paperissue'] += ['document' => ''];
+            }
+            $postDoc = $post['Paperissue']['document'];
+            if ($postDoc != '' && $postDoc != null) {
+                @unlink('papers/' . $postDoc);
+            }
+            $post['Paperissue']['document'] = $docname;
+
+        }
+        if ($model->load($post) && $model->save()) {
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
+    }
+
+    /**
+     * @param $model
+     * @return bool
+     */
+    protected function actionUpload($model)
+    {
+        if (Yii::$app->request->isPost && $model->download = UploadedFile::getInstance($model, 'download')) {
+            if ($name = $model->upload()) {
+                // file is uploaded successfully
+
+                return $name;
+            }
+        }
+        return false;
     }
 
     /**
@@ -102,11 +138,16 @@ class PaperissueController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $paper_id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $filename = $model->document;
+        if ($filename != null && $filename != '') {
+            @unlink('papers/' . $filename);
+        }
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['paper/update', 'id' => $paper_id]);
     }
 
     /**

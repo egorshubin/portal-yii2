@@ -176,8 +176,8 @@ class Paper extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPaperissueTies()
+    public function getPaperissue()
     {
-        return $this->hasMany(PaperissueTie::className(), ['paper_id' => 'id']);
+        return $this->hasMany(Paperissue::className(), ['paper_id' => 'id']);
     }
 }
