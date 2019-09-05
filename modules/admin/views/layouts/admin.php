@@ -6,9 +6,6 @@
 
 use app\widgets\Alert;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AdminAsset;
 use yii\widgets\Menu;
 
@@ -57,7 +54,7 @@ AdminAsset::register($this);
             </div>
             <div class="col-lg-2">
                 <div class="header-clientLinks logout-wrapper">
-                    <a href="">Выйти <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+                    <a href="/admin/login/logout">Выйти <i class="fa fa-sign-out" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>

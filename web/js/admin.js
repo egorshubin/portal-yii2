@@ -130,9 +130,7 @@ jQuery(document).ready(function ($) {
     /*Saving form*/
     $('.save').click(function () {
         $('form').submit();
-        if(!$('.required').hasClass('has-error')) {
-            $('.undercover-loading').show();
-        }
+        $('.undercover-loading').show();
     })
 
     /*Анимация-крутилка*/

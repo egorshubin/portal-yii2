@@ -88,11 +88,11 @@ class EventController extends Controller
                 $post['Event'] += ['document' => ''];
             }
             $postDoc = $post['Event']['document'];
+
             if ($postDoc != '' && $postDoc != null) {
                 @unlink('uploads/' . $postDoc);
             }
             $post['Event']['document'] = $docname;
-
         }
         if ($model->load($post) && $model->save() && $model->saveCheckedIds($post['Event']['checkedIds'])) {
             return $this->redirect(['update', 'id' => $model->id]);
